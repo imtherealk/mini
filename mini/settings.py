@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+ROOT_PATH = os.path.dirname(__file__)
 SANDBOX = os.path.join(BASE_DIR, 'sandbox')
 
 if not os.path.exists(SANDBOX):
@@ -87,5 +88,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(ROOT_PATH, 'media')
+MEDIA_URL = '/media/'
+ADMIN_MEDIA_PREFIX = '/media/admin/'
 
 AUTH_PROFILE_MODULE = 'mini.web.models.UserProfile'

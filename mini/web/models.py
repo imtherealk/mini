@@ -5,7 +5,20 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 
-class UserProfile(models.Model):
+class Model(models.Model):
+    def __repr__(self):
+        module_name = __name__
+        class_name = type(self).__name__
+        return module_name + '.' + class_name + '(%s)' % self.id
+
+    def __str__(self):
+        return repr(self)
+
+    class Meta(object):
+        abstract = True
+
+
+class UserProfile(Model):
     RELATIONSHIP_STATUSES = (
         ('y', 'Yes'),
         ('n', 'No'),
@@ -20,7 +33,7 @@ class UserProfile(models.Model):
                                       blank=True)
 
 
-class Post(models.Model):
+class Post(Model):
     writer = models.ForeignKey(User)
     content = models.TextField(null=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -28,30 +41,30 @@ class Post(models.Model):
     image = models.ImageField(upload_to=IMAGE_DIR, null=True, blank=True)
 
 
-class Comment(models.Model):
+class Comment(Model):
     writer = models.ForeignKey(User)
     content = models.TextField(null=False)
     created = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(Post)
 
 
-class Friend(models.Model):
+class Friend(Model):
     first_user = models.ForeignKey(User, related_name='+')
     second_user = models.ForeignKey(User, related_name='+')
     created = models.DateTimeField(auto_now_add=True)
 
 
-class FriendRequest(models.Model):
+class FriendRequest(Model):
     from_user = models.ForeignKey(User, related_name='+')
     to_user = models.ForeignKey(User, related_name='+')
     created = models.DateTimeField(auto_now_add=True)
 
 
-class PostLike(models.Model):
+class PostLike(Model):
     user = models.ForeignKey(User)
     post = models.ForeignKey(Post)
 
 
-class CommentLike(models.Model):
+class CommentLike(Model):
     user = models.ForeignKey(User)
     comment = models.ForeignKey(Comment)
