@@ -58,6 +58,11 @@ ROOT_URLCONF = 'mini.urls'
 
 WSGI_APPLICATION = 'mini.wsgi.application'
 
+TEMPLATE_DIRS = (
+    ROOT_PATH + '/templates',
+)
+
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -93,3 +98,5 @@ MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
 AUTH_PROFILE_MODULE = 'mini.web.models.UserProfile'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

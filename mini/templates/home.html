@@ -1,0 +1,48 @@
+{% include 'layout/header.html' %}
+    <div class="navbar navbar-default" role="navigation">
+    <div class="container">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#" style="font-size: 2em; font-family: courier">MINI</a>
+    </div>
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 0">
+        <li><a>
+            <form id="login_form" method="post" action="/login" class="form-inline">
+                <input type="text" class="form-control input-sm" name="username"  value="" placeholder="Username">
+                <input type="password" class="form-control input-sm" name="password"  value="" placeholder="Password">
+                <input type="submit" class="btn btn-default" value="Login"/>
+            </form></a>
+        </li>
+        </ul>
+    </div>
+    </div>
+<div class="container-fluid">
+    <div class="well well-lg" style="display:inline-block; width: 100%; background-image: none; background-color: #f7f7f7">
+        <div class="col-lg-5">
+            <h1 class="">Hello, world!</h1>
+
+            <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-lg-7">
+            <div class="panel panel-default" style="width: 480px; float:right; background-color: #f7f7f7; border:none; box-shadow:none;">
+                <div class="panel-body">
+                    {% if registered %}
+                    <h2>가입하셨습니다.</h2>
+                    {% else %}
+                    <form method="post" action="/user/" enctype="multipart/form-data" class="form-horizontal" role="form">
+                        {{user_form.as_p}}
+                        {{profile_form.as_p}}
+                        <input type="submit" name="submit" value="Register"/>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+	{% include 'layout/footer.html' %}

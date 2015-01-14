@@ -1,0 +1,32 @@
+POST /login : 로그인
+GET /logout : 로그아웃
+ 
+GET / : 홈 (news feed)
+ 
+POST /user/ : 회원 가입 
+POST /user/{{user.id}}/delete : 탈퇴
+GET /user/{{user.id}} : 유저 프로필 보기
+GET /user/{{user.id}}/update : 프로필 수정 form 
+POST /user/{{user.id}}/update : 프로필 update
+ 
+POST /post/ : 글 쓰기
+GET /user/{{user.id}}/post/ : 해당 유저 글 목록 보기
+GET /user/{{user.id}}/post/{{post.id}} : 해당 글 읽기
+GET /post/{{post.id}}/update : 글 수정 form
+POST /post/{{post.id}}/update : 글 update
+POST /post/{{post.id}}/delete : 글 삭제
+POST /post/{{post.id}}/like : 글 좋아요
+ 
+POST /post/{{post.id}}/comment/ : 해당 글에 댓글 쓰기
+GET /post/{{post.id}}/comment/ : 해당 글의 댓글 목록 보기
+GET /comment/{{comment.id}}/update : 해당 댓글 수정 form
+POST /comment/{{comment.id}}/update : 해당 댓글 update
+POST /comment/{{comment.id}}/delete : 해당 댓글 삭제
+POST /comment/{{comment.id}}/like : 댓글 좋아요
+ 
+GET /user/{{user.id}}/friend/ : 친구 목록 보기
+POST /user/{{from_user.id}}/friendrequest/{{to_user.id}} : 친구 요청
+GET /user/{{user.id}}/friendrequest/ : user에게 온 친구 요청 목록
+POST /user/{{to_user.id}}/friendrequest/{{from_user.id}}/delete : 친구 요청 거절
+POST /user/{{to_user.id}}/friend/friendrequest/{{from_user.id}} : 친구 요청 승인
+POST /user/{{user.id}}/friend/{{other_user.id}}/delete : user가 other_user를 친구에서 삭제
