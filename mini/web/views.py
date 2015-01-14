@@ -32,7 +32,7 @@ def home(request):
 
 @csrf_exempt
 def register(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         return redirect('home')
 
     ctx = RequestContext(request)

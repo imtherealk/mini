@@ -20,13 +20,13 @@ class Model(models.Model):
 
 class UserProfile(Model):
     RELATIONSHIP_STATUSES = (
-        ('y', 'Yes'),
-        ('n', 'No'),
-        ('m', 'Married'),
+        ('y', '연애중'),
+        ('n', '싱글'),
+        ('m', '결혼'),
     )
 
     user = models.ForeignKey(User, unique=True)
-    relationship_status = models.CharField(max_length=1, null=True,
+    relationship_status = models.CharField(max_length=1, null=True, blank=True,
                                            choices=RELATIONSHIP_STATUSES)
     IMAGE_DIR = os.path.join(settings.SANDBOX, 'profile-images')
     profile_image = models.ImageField(upload_to=IMAGE_DIR, null=True,
