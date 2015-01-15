@@ -1,11 +1,11 @@
-POST /login : 로그인
-GET /logout : 로그아웃
+POST /login : 로그인 ㅇ
+GET /logout : 로그아웃 ㅇ
  
-GET / : 홈 (news feed)
+GET / : 홈 (news feed) ㅇ
  
-POST /user/ : 회원 가입 
-POST /user/{{user.id}}/delete : 탈퇴
-GET /user/{{user.id}} : 유저 프로필 보기
+POST /user/ : 회원 가입 ㅇ
+POST /user/{{user.id}}/delete : 탈퇴 ㅇ
+GET /user/{{user.id}} : 유저 프로필 보기 ㅇ
 GET /user/{{user.id}}/update : 프로필 수정 form 
 POST /user/{{user.id}}/update : 프로필 update
  

@@ -12,10 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ROOT_PATH = os.path.dirname(__file__)
-SANDBOX = os.path.join(BASE_DIR, 'sandbox')
 
-if not os.path.exists(SANDBOX):
-    os.makedirs(SANDBOX)
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,7 +26,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -97,6 +94,7 @@ MEDIA_ROOT = os.path.join(ROOT_PATH, 'media')
 MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
-AUTH_PROFILE_MODULE = 'mini.web.models.UserProfile'
-
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SANDBOX = os.path.join(MEDIA_ROOT, 'sandbox')
+if not os.path.exists(SANDBOX):
+    os.makedirs(SANDBOX)

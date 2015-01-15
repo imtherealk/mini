@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 import functools
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.http import Http404
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -12,7 +11,6 @@ from mini.web.models import *
 from django.template import Context, loader
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import user_passes_test
 from django.conf import settings
 
 
@@ -53,6 +51,7 @@ def register(request):
                 profile.profile_image = request.FILES['profile_image']
 
             profile.save()
+
             registered = True
 
         else:
@@ -102,6 +101,40 @@ def log_out(request):
 @login_required
 def user_profile(request, username=None):
     request_user = request.user
-    profile_user = User.objects.get(username=username)
-    return render_to_response('profile.html', {'profile_user': profile_user,
-                                               'request_user': request_user})
+    user = User.objects.get(username=username)
+
+    if request_user == user:
+        me = True
+    else:
+        me = False
+
+    profile = UserProfile.objects.get_or_create(user=user)[0]
+    rel_status = profile.get_relationship_status_display()
+    return render_to_response('profile.html', {'profile': profile,
+                                               'request_user': request_user,
+                                               'rel_status': rel_status,
+                                               'me': me})
+
+
+@login_required
+def profile_update(request, username=None):
+    ctx = RequestContext(request)
+    updated = False
+
+    pass
+
+ #   if request.method == 'POST':
+        #form = Form(data=request.POST)
+
+      #  if form.is_valid():
+      #      save()
+      #      updated = True
+
+      #  else:
+      #      pass
+
+  #  else:
+     #   form = Form()
+
+  #  return render_to_response(
+   #     'profile.html', {'form': form, 'updated': updated}, ctx)

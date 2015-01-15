@@ -25,12 +25,16 @@ class UserProfile(Model):
         ('m', '결혼'),
     )
 
-    user = models.ForeignKey(User, unique=True)
+    user = models.OneToOneField(User)
     relationship_status = models.CharField(max_length=1, null=True, blank=True,
                                            choices=RELATIONSHIP_STATUSES)
-    IMAGE_DIR = os.path.join(settings.SANDBOX, 'profile-images')
-    profile_image = models.ImageField(upload_to=IMAGE_DIR, null=True,
-                                      blank=True)
+    IMAGE_DIR = 'sandbox/profile-images'
+    profile_image = models.ImageField(
+        upload_to=IMAGE_DIR, null=True,
+        blank=True,
+        default='sandbox/profile-images/default.png')
+    birth = models.DateField(null=True, blank=True)
+    phone = models.CharField(max_length=11, null=True, blank=True)
 
 
 class Post(Model):
