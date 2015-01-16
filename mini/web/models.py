@@ -30,7 +30,7 @@ class UserProfile(Model):
                                            choices=RELATIONSHIP_STATUSES)
     IMAGE_DIR = 'sandbox/profile-images'
     profile_image = models.ImageField(
-        upload_to=IMAGE_DIR, null=True,
+        upload_to=IMAGE_DIR, null=False,
         blank=True,
         default='sandbox/profile-images/default.png')
     birth = models.DateField(null=True, blank=True)

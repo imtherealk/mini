@@ -6,7 +6,8 @@ from django.http import Http404
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response
-from mini.web.forms import UserForm, UserProfileForm
+from mini.web.forms \
+    import UserForm, UserProfileForm, EditUserForm, EditProfileForm
 from mini.web.models import *
 from django.template import Context, loader
 from django.contrib.auth import authenticate, login, logout
@@ -37,8 +38,8 @@ def register(request):
     registered = False
 
     if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
+        user_form = UserForm(request.POST)
+        profile_form = UserProfileForm(request.POST, request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
@@ -46,10 +47,6 @@ def register(request):
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
-
-            if 'profile_image' in request.FILES:
-                profile.profile_image = request.FILES['profile_image']
-
             profile.save()
 
             registered = True
@@ -116,25 +113,40 @@ def user_profile(request, username=None):
                                                'me': me})
 
 
+@csrf_exempt
 @login_required
 def profile_update(request, username=None):
     ctx = RequestContext(request)
+    user = User.objects.get(username=username)
+    if request.user != user:
+        return redirect('home')
+    profile = UserProfile.objects.get(user=user)
+
     updated = False
 
-    pass
+    if request.method == 'POST':
+        edit_u_form = EditUserForm(request.POST, instance=user)
+        edit_p_form = EditProfileForm(request.POST, request.FILES,
+                                      instance=profile)
 
- #   if request.method == 'POST':
-        #form = Form(data=request.POST)
+        if edit_u_form.is_valid() and edit_p_form.is_valid():
+            edit_u_form.save()
+            edit_p_form.save()
+            if 'profile_image' not in request.FILES:
+                profile.profile_image = 'sandbox/profile-images/default.png'
+            profile.save()
 
-      #  if form.is_valid():
-      #      save()
-      #      updated = True
+            updated = True
 
-      #  else:
-      #      pass
+    else:
+        edit_u_form = EditUserForm(instance=user)
+        edit_p_form = EditProfileForm(instance=profile)
 
-  #  else:
-     #   form = Form()
+    if updated:
+        return redirect('/user/'+username)
 
-  #  return render_to_response(
-   #     'profile.html', {'form': form, 'updated': updated}, ctx)
+    return render_to_response(
+        'edit_profile.html', {'profile': profile,
+                              'edit_u_form': edit_u_form,
+                              'edit_p_form': edit_p_form,
+                              'updated': updated}, ctx)

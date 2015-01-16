@@ -1,44 +1,44 @@
 {% include 'layout/header.html' %}
 {% include 'navbar_top.html' %}
- <div class="container">
+    <div class="container">
       <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
           <div class="panel panel-info">
             <div class="panel-heading">
               <h3 class="panel-title">{{profile.user.username}}</h3>
             </div>
+            <form method="post" action="/user/{{profile.user.username}}/update" enctype="multipart/form-data" class="form-horizontal" role="form">
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center">
                 <p>
-                    <img src="{{ profile.profile_image.url }}" height="100" width="100" class="img-circle"/>
+                    <img src="{{ edit_p_form.profile_image.value.url }}" height="100" width="100" class="img-circle"/>
                 </p>
-                 <p><a href="#" class="btn btn-primary" style="width: 100px;">Friends</a></p>
-                 <p><a href="#" class="btn btn-primary" style="width: 100px;">Posts</a></p>
+                 <p>{{edit_p_form.profile_image}}</p>
                 </div>
 
                 <div class=" col-md-9 col-lg-9 ">
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
-                        <td>E-mail</td>
-                        <td>{{profile.user.email}}</td>
+                        <td>{{edit_u_form.email.label}}</td>
+                        <td>{{edit_u_form.email}}</td>
                       </tr>
                       <tr>
-                        <td>생일</td>
-                        <td>{{profile.birth}}</td>
+                        <td>{{edit_p_form.birth.label}}</td>
+                        <td>{{edit_p_form.birth}}</td>
                       </tr>
                       <tr>
-                        <td>가입일</td>
+                        <td>가입일:</td>
                         <td>{{profile.user.date_joined}}</td>
                       </tr>
                        <tr>
-                        <td>전화번호</td>
-                        <td>{{profile.phone}}</td>
+                        <td>{{edit_p_form.phone.label}}</td>
+                        <td>{{edit_p_form.phone}}</td>
                       </tr>
                       <tr>
-                        <td>상태</td>
-                        <td>{{rel_status}}</td>
+                        <td>{{edit_p_form.relationship_status.label}}</td>
+                        <td>{{edit_p_form.relationship_status}}</td>
                       </tr>
                   </tbody>
                   </table>
@@ -46,14 +46,11 @@
               </div>
             </div>
                  <div class="panel-footer" style="height: 50px;">
-                     <form id="unregister_form" method="post" action="/user/{{request_user.username}}/delete"></form>
-                     {% if me %}
                         <span class="pull-right">
-                            <a href="/user/{{request_user.username}}/update" type="button" class="btn btn-sm btn-warning">정보 수정</a>
-                            <a href="javascript:{document.getElementById('unregister_form').submit();}" onclick="return confirm('Are you sure?');" type="button" class="btn btn-sm btn-danger">탈퇴</a>
+                            <input type="submit" name="submit" class="btn btn-sm btn-primary" value="저장"/>
                         </span>
-                     {% endif %}
                  </div>
+          </form>
           </div>
         </div>
       </div>

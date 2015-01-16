@@ -10,6 +10,10 @@ class UserForm(forms.ModelForm):
                                help_text='*',
                                label='비밀번호')
 
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['email'].label = 'E-mail'
+
     class Meta:
         model = User
         fields = ('username', 'password', 'email')
@@ -36,9 +40,29 @@ class UserProfileForm(forms.ModelForm):
         help_texts = {
             'birth': '(yyyy-mm-dd)',
         }
-        error_messages = {
-            'username': {
-                'required': '사용자명을 입력해주세요',
-            },
-        }
 
+
+class EditUserForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(EditUserForm, self).__init__(*args, **kwargs)
+        self.fields['email'].label = 'E-mail'
+
+    class Meta:
+        model = User
+        fields = ('email',)
+
+
+class EditProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.fields['birth'].label = '생일'
+        self.fields['phone'].label = '전화번호'
+        self.fields['relationship_status'].label = '상태'
+        self.fields['profile_image'].label = '프로필 사진'
+
+    class Meta:
+        model = UserProfile
+        fields = ('birth', 'phone', 'relationship_status', 'profile_image')
+        help_texts = {
+            'birth': '(yyyy-mm-dd)',
+        }
