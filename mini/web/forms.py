@@ -1,7 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
 from mini.web.models import UserProfile, Post, Comment
-__author__ = 'my'
+from django.forms import ClearableFileInput
+
+
+class MyClearableFileInput(ClearableFileInput):
+    template_with_initial = '%(input)s'
 
 
 class UserForm(forms.ModelForm):
@@ -65,4 +69,8 @@ class EditProfileForm(forms.ModelForm):
         fields = ('birth', 'phone', 'relationship_status', 'profile_image')
         help_texts = {
             'birth': '(yyyy-mm-dd)',
+            'profile_image': ''
+        }
+        widgets = {
+            'profile_image': MyClearableFileInput(),
         }

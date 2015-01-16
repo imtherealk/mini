@@ -132,9 +132,10 @@ def profile_update(request, username=None):
         if edit_u_form.is_valid() and edit_p_form.is_valid():
             edit_u_form.save()
             edit_p_form.save()
-            if 'profile_image' not in request.FILES:
+            if 'profile_image' not in request.FILES \
+                    and profile.profile_image is None:
                 profile.profile_image = 'sandbox/profile-images/default.png'
-            profile.save()
+                profile.save()
 
             updated = True
 
