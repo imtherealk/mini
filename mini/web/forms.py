@@ -92,4 +92,34 @@ class EditProfileForm(forms.ModelForm):
         }
         widgets = {
             'profile_image': MyClearableFileInput(),
+            'birth': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'relationship_status': forms.Select(
+                attrs={'class': 'form-control'})
+        }
+
+
+class PostForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+        self.fields['content'].label = ''
+        self.fields['image'].label = '사진'
+
+    class Meta:
+        model = Post
+        fields = ('content', 'image')
+        help_texts = {
+        }
+        error_messages = {
+            'content': {
+                'required': '내용을 입력해주세요.',
+            },
+        }
+        widgets = {
+            'image': MyClearableFileInput(),
+            'content': forms.Textarea(attrs={'class': 'form-control',
+                                             'style': 'width: 100%;'
+                                                      'resize: none;'
+                                                      'height: 50px;',
+                                             'placeholder': "What's up?"})
         }
