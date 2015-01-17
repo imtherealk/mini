@@ -6,12 +6,12 @@ GET / : 홈 (news feed) ㅇ
 POST /user/ : 회원 가입 ㅇ
 POST /user/{{user.id}}/delete : 탈퇴 ㅇ
 GET /user/{{user.id}} : 유저 프로필 보기 ㅇ
-GET /user/{{user.id}}/update : 프로필 수정 form 
-POST /user/{{user.id}}/update : 프로필 update
+GET /user/{{user.id}}/update : 프로필 수정 form ㅇ
+POST /user/{{user.id}}/update : 프로필 update ㅇ
  
-POST /post/ : 글 쓰기
-GET /user/{{user.id}}/post/ : 해당 유저 글 목록 보기
-GET /user/{{user.id}}/post/{{post.id}} : 해당 글 읽기
+POST /post/ : 글 쓰기 ㅇ
+GET /user/{{user.id}}/post/ : 해당 유저 글 목록 보기 ㅇ
+GET /post/{{post.id}} : 해당 글 읽기 ㅇ
 GET /post/{{post.id}}/update : 글 수정 form
 POST /post/{{post.id}}/update : 글 update
 POST /post/{{post.id}}/delete : 글 삭제

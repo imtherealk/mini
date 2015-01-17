@@ -9,14 +9,17 @@ class MyClearableFileInput(ClearableFileInput):
 
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput(),
-                               error_messages={'required': '비밀번호를 입력해주세요'},
-                               help_text='*',
-                               label='비밀번호')
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control',
+                                          'placeholder': 'Password'}),
+        error_messages={'required': '비밀번호를 입력해주세요'},
+        help_text='*',
+        label='')
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
-        self.fields['email'].label = 'E-mail'
+        self.fields['username'].label = ''
+        self.fields['email'].label = ''
 
     class Meta:
         model = User
@@ -29,12 +32,18 @@ class UserForm(forms.ModelForm):
                 'required': '사용자명을 입력해주세요',
             },
         }
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control',
+                                               'placeholder': 'Username'}),
+            'email': forms.TextInput(attrs={'class': 'form-control',
+                                            'placeholder': 'E-mail'}),
+        }
 
 
 class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
-        self.fields['birth'].label = '생일'
+        self.fields['birth'].label = ''
         self.fields['relationship_status'].label = '상태'
         self.fields['profile_image'].label = '프로필 사진'
 
@@ -43,6 +52,13 @@ class UserProfileForm(forms.ModelForm):
         fields = ('birth', 'relationship_status', 'profile_image')
         help_texts = {
             'birth': '(yyyy-mm-dd)',
+        }
+        widgets = {
+            'profile_image': MyClearableFileInput(),
+            'birth': forms.TextInput(attrs={'class': 'form-control',
+                                            'placeholder': 'Date of Birth'}),
+            'relationship_status': forms.Select(
+                attrs={'class': 'form-control'})
         }
 
 
@@ -54,6 +70,9 @@ class EditUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('email',)
+        widgets = {
+            'email': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 
 class EditProfileForm(forms.ModelForm):

@@ -14,6 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ROOT_PATH = os.path.dirname(__file__)
 
 
+LOGIN_URL = 'home'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -76,7 +77,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'ko-KR'
 
-TIME_ZONE = 'KST'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 

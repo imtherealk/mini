@@ -41,7 +41,7 @@ class Post(Model):
     writer = models.ForeignKey(User)
     content = models.TextField(null=False)
     created = models.DateTimeField(auto_now_add=True)
-    IMAGE_DIR = os.path.join(settings.SANDBOX, 'post-images')
+    IMAGE_DIR = IMAGE_DIR = 'sandbox/profile-images'
     image = models.ImageField(upload_to=IMAGE_DIR, null=True, blank=True)
 
 
