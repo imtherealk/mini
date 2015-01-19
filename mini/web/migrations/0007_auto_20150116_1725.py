@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='userprofile',
             name='profile_image',
-            field=models.ImageField(default='sandbox/profile-images/default.png', upload_to='sandbox/profile-images', blank=True),
+            field=models.ImageField(default='sandbox/profile-images/default_profile.png', upload_to='sandbox/profile-images', blank=True),
             preserve_default=True,
         ),
     ]

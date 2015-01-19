@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 class Model(models.Model):
@@ -29,7 +30,7 @@ class UserProfile(Model):
     profile_image = models.ImageField(
         upload_to=IMAGE_DIR, null=False,
         blank=True,
-        default=IMAGE_DIR+'/default.png')
+        default=settings.STATIC_URL+'images/default_profile.png')
     birth = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=11, null=True, blank=True)
 

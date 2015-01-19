@@ -18,5 +18,8 @@ urlpatterns = patterns('',
     url(r'^user/(?P<username>\w+)/post', 'mini.web.views.timeline'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-    {'document_root': settings.MEDIA_ROOT}),
+        {'document_root': settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.STATIC_ROOT})
 )
+
