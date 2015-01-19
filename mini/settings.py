@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ROOT_PATH = os.path.dirname(__file__)
-
+SANDBOX = os.path.join(BASE_DIR, 'sandbox')
+if not os.path.exists(SANDBOX):
+    os.makedirs(SANDBOX)
 
 LOGIN_URL = 'home'
 
@@ -89,13 +91,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+STATIC_ROOT = os.path.join(ROOT_PATH, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(ROOT_PATH, 'media')
+MEDIA_ROOT = os.path.join(SANDBOX, 'media')
 MEDIA_URL = '/media/'
-ADMIN_MEDIA_PREFIX = '/media/admin/'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SANDBOX = os.path.join(MEDIA_ROOT, 'sandbox')
-if not os.path.exists(SANDBOX):
-    os.makedirs(SANDBOX)
+

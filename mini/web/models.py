@@ -1,7 +1,4 @@
-import os
-
 from django.db import models
-from django.conf import settings
 from django.contrib.auth.models import User
 
 
@@ -28,11 +25,11 @@ class UserProfile(Model):
     user = models.OneToOneField(User)
     relationship_status = models.CharField(max_length=1, null=True, blank=True,
                                            choices=RELATIONSHIP_STATUSES)
-    IMAGE_DIR = 'sandbox/profile-images'
+    IMAGE_DIR = 'profile-images'
     profile_image = models.ImageField(
         upload_to=IMAGE_DIR, null=False,
         blank=True,
-        default='sandbox/profile-images/default.png')
+        default=IMAGE_DIR+'/default.png')
     birth = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=11, null=True, blank=True)
 
@@ -41,7 +38,7 @@ class Post(Model):
     writer = models.ForeignKey(User)
     content = models.TextField(null=False)
     created = models.DateTimeField(auto_now_add=True)
-    IMAGE_DIR = IMAGE_DIR = 'sandbox/profile-images'
+    IMAGE_DIR = 'post-images'
     image = models.ImageField(upload_to=IMAGE_DIR, null=True, blank=True)
 
 

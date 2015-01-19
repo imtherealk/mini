@@ -10,5 +10,5 @@ setup(
     author='realk',
     author_email='imtherealk@gmail.com',
     description='Mini facebook',
-    install_requires=['django'],
+    install_requires=['django', 'pillow'],
 )
