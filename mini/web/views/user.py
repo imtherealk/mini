@@ -63,10 +63,11 @@ def read(request, username=None):
 
     profile = m.UserProfile.objects.get_or_create(user=user)[0]
     rel_status = profile.get_relationship_status_display()
-    return render_to_response('profile.html', {'profile': profile,
-                                               'request_user': request_user,
-                                               'rel_status': rel_status,
-                                               'me': me})
+    return render_to_response('user/profile.html',
+                              {'profile': profile,
+                               'request_user': request_user,
+                               'rel_status': rel_status,
+                               'me': me})
 
 
 @csrf_exempt
@@ -103,7 +104,7 @@ def update(request, username=None):
         return redirect('/user/'+username)
 
     return render_to_response(
-        'edit_profile.html', {'profile': profile,
-                              'edit_u_form': edit_u_form,
-                              'edit_p_form': edit_p_form,
-                              'request_user': request.user}, ctx)
+        'user/update.html', {'profile': profile,
+                             'edit_u_form': edit_u_form,
+                             'edit_p_form': edit_p_form,
+                             'request_user': request.user}, ctx)

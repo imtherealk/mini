@@ -6,7 +6,7 @@ from django.template import Context, loader
 
 def home(request):
     if request.user.is_authenticated():
-        tpl = loader.get_template('newsfeed.html')
+        tpl = loader.get_template('post/newsfeed.html')
         ctx = Context({'request_user': request.user})
         return HttpResponse(tpl.render(ctx))
 

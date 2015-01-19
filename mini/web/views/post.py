@@ -29,8 +29,8 @@ def write(request):
         post_form = f.PostForm()
 
         return render_to_response(
-            'post_form.html', {'post_form': post_form,
-                               'request_user': request.user}, ctx)
+            'post/write.html', {'post_form': post_form,
+                                'request_user': request.user}, ctx)
 
 
 def read(request, post_id=None):
@@ -38,7 +38,7 @@ def read(request, post_id=None):
     writer = post.writer
     profile = m.UserProfile.objects.get(user=writer)
 
-    tpl = loader.get_template('post.html')
+    tpl = loader.get_template('post/read.html')
     ctx = Context({
         'post': post,
         'profile': profile,
@@ -52,7 +52,7 @@ def timeline(request, username=None):
     profile = m.UserProfile.objects.get(user=writer)
     posts = m.Post.objects.filter(writer=writer).order_by('-created')
 
-    tpl = loader.get_template('post_list.html')
+    tpl = loader.get_template('post/timeline.html')
     ctx = Context({
         'posts': posts,
         'request_user': request.user,

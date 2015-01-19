@@ -1,0 +1,13 @@
+{% include 'layout/header.html' %}
+{% include 'navbar_top.html' %}
+<div class="container" style="margin-bottom:10px;">
+    <div class="row">
+        <div class="col-lg-7" style="padding:10px 10px 10px 10px; background-color: #ffffff; border: 1px solid #e1e1e1; border-radius: 5px">
+        {% include 'post/write.html' %}
+        </div>
+    </div>
+</div>
+{% for post in posts %}
+{% include 'post/read.html' %}
+{% endfor %}
+{% include 'layout/footer.html' %}
