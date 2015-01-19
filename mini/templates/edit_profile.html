@@ -1,59 +1,56 @@
 {% include 'layout/header.html' %}
 {% include 'navbar_top.html' %}
-    <div class="container">
-      <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">{{profile.user.username}}</h3>
-            </div>
-            <form method="post" action="/user/{{profile.user.username}}/update" enctype="multipart/form-data" class="form-horizontal" role="form">
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center">
-                <p>
-                    <img src="{{ edit_p_form.profile_image.value.url }}" height="100" width="100" class="img-circle"/>
-                </p>
-                 <p>{{edit_p_form.profile_image}}</p>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{profile.user.username}}</h3>
                 </div>
-
-                <div class=" col-md-9 col-lg-9 ">
-                  <table class="table table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>{{edit_u_form.email.label}}</td>
-                        <td>{{edit_u_form.email}}</td>
-                      </tr>
-                      <tr>
-                        <td>{{edit_p_form.birth.label}}</td>
-                        <td>{{edit_p_form.birth}}</td>
-                      </tr>
-                      <tr>
-                        <td>가입일:</td>
-                        <td>{{profile.user.date_joined}}</td>
-                      </tr>
-                       <tr>
-                        <td>{{edit_p_form.phone.label}}</td>
-                        <td>{{edit_p_form.phone}}</td>
-                      </tr>
-                      <tr>
-                        <td>{{edit_p_form.relationship_status.label}}</td>
-                        <td>{{edit_p_form.relationship_status}}</td>
-                      </tr>
-                  </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-                 <div class="panel-footer" style="height: 50px;">
+                <form method="post" action="/user/{{profile.user.username}}/update" enctype="multipart/form-data" class="form-horizontal" role="form">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3 " align="center">
+                                <p><img src="{{ edit_p_form.profile_image.value.url }}" height="100" width="100" class="img-circle"/></p>
+                                <p>{{edit_p_form.profile_image}}</p>
+                            </div>
+                            <div class=" col-md-9 col-lg-9 ">
+                                <table class="table table-user-information">
+                                <tbody>
+                                <tr>
+                                <td>{{edit_u_form.email.label}}</td>
+                                <td>{{edit_u_form.email}}</td>
+                                </tr>
+                                <tr>
+                                <td>{{edit_p_form.birth.label}}</td>
+                                <td>{{edit_p_form.birth}}</td>
+                                </tr>
+                                <tr>
+                                <td>가입일:</td>
+                                <td>{{profile.user.date_joined}}</td>
+                                </tr>
+                                <tr>
+                                <td>{{edit_p_form.phone.label}}</td>
+                                <td>{{edit_p_form.phone}}</td>
+                                </tr>
+                                <tr>
+                                <td>{{edit_p_form.relationship_status.label}}</td>
+                                <td>{{edit_p_form.relationship_status}}</td>
+                                </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer" style="height: 50px;">
                         <span class="pull-right">
-                            <input type="submit" name="submit" class="btn btn-sm btn-primary" value="저장"/>
+                        <input type="submit" name="submit" class="btn btn-sm btn-primary" value="저장"/>
                         </span>
-                 </div>
-          </form>
-          </div>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
+</div>
 
 {% include 'layout/footer.html' %}

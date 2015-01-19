@@ -1,9 +1,11 @@
 {% include 'layout/header.html' %}
 {% include 'navbar_top.html' %}
  <form method="post" action="/post/" enctype="multipart/form-data" class="form-horizontal" role="form">
-        {{post_form.as_p}}
-     <div class="panel-footer" style="height: 50px;">
-         <div class="pull-right">
-     <input type="submit" name="submit" class="btn btn-default" value="확인"/></div></div>
+    {{post_form.as_p}}
+    <div class="panel-footer" style="height: 50px;">
+        <div class="pull-right">
+            <input type="submit" name="submit" class="btn btn-default" value="확인"/>
+        </div>
+    </div>
 </form>
 {% include 'layout/footer.html' %}
