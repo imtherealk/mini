@@ -1,11 +1,18 @@
-{% include 'layout/header.html' %}
-{% include 'navbar_top.html' %}
- <form method="post" action="/post/" enctype="multipart/form-data" class="form-horizontal" role="form">
-    {{post_form.as_p}}
-    <div class="panel-footer" style="height: 50px;">
-        <div class="pull-right">
-            <input type="submit" name="submit" class="btn btn-default" value="확인"/>
+{% extends 'default/base.html' %}
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7" style="padding:10px 10px 10px 10px; background-color: #ffffff; border: 1px solid #e1e1e1; border-radius: 5px">
+                <form method="post" action="/post/" enctype="multipart/form-data" class="form-horizontal" role="form">
+                    {{ post_form.as_p }}
+                    <div class="panel-footer" style="height: 50px;">
+                        <div class="pull-right">
+                            <input type="submit" name="submit" class="btn btn-default" value="확인"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</form>
-{% include 'layout/footer.html' %}
+
+{% endblock %}

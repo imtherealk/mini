@@ -1,0 +1,27 @@
+{% extends "default/default.html" %}
+{% load staticfiles %}
+{% block style %}
+    {{ block.super }}
+
+    <!-- Twitter Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Default CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}"/>
+
+{% endblock style %}
+
+{% block js %}
+    {{ block.super }}
+    {% include 'default/top.html' %}
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+{% endblock js %}
+
+{% block body %}y
+    <div id="main">
+        {% block main %}
+        {% endblock main %}
+    </div>
+{% endblock body %}

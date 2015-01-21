@@ -1,26 +1,5 @@
-{% include 'layout/header.html' %}
-{% include 'navbar_top.html' %}
-<div class="container" style="margin-bottom:10px;">
-    <div class="row">
-        <div class="col-lg-7" style="padding-top:10px; background-color: #ffffff; border: 1px solid #e1e1e1; border-radius: 5px">
-            <h4 class="media-heading">
-                <a href="/user/{{post.writer.username}}" style="text-decoration: none;">
-                    <img class="media-object" src="{{profile.profile_image.url}}" width="64" height="64">
-                    {{post.writer.username}}
-                </a>
-                <a href="/post/{{post.id}}"><small><span class="glyphicon glyphicon-time"></span> {{post.created}}</small></a>
-            </h4>
-            <br/>
-            {% if post.image %}
-            <img src="{{post.image.url}}" width="500">
-            {% endif %}
-            {{post.content | linebreaks}}
-            <hr>
-            {% include 'comment/write.html' %}
-        </div>
-        <!-- Sidebar Column -->
-        <div class="col-md-5">
-        </div>
-    </div>
-</div>
-{% include 'layout/footer.html' %}
+{% extends 'default/base.html' %}
+
+{% block main %}
+{% include 'post/post.html' %}
+{%  endblock main %}
