@@ -50,7 +50,6 @@ def unregister(request, username=None):
     return redirect('home')
 
 
-@login_required
 def read(request, username=None):
     user = m.User.objects.get(username=username)
 

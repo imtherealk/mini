@@ -16,8 +16,8 @@ urlpatterns = patterns(
         name='user.delete'),
 
     # Auth
-    url(r'^login', 'mini.web.views.auth.log_in'),
-    url(r'^logout', 'mini.web.views.auth.log_out'),
+    url(r'^login', 'mini.web.views.auth.login'),
+    url(r'^logout', 'mini.web.views.auth.logout'),
 
     # Post
     url(r'^post/$', 'mini.web.views.post.write'),
