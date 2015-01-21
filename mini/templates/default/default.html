@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     {% block head %}
         <title>{% block title %}Mini{% endblock title %}</title>
 
         {% block meta %}
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         {% endblock meta %}
 
         {% block style %}
@@ -16,9 +16,9 @@
         {% endblock js %}
 
     {% endblock head %}
-  </head>
-  <body>
-    {% block body %}
-    {% endblock body %}
-  </body>
+</head>
+<body>
+{% block body %}
+{% endblock body %}
+</body>
 </html>

@@ -17,16 +17,16 @@
                         <div class="row">
                             <div class="col-md-3 col-lg-3 " align="center">
                                 <p>
-                                    <img src="{{ profile.profile_image.url }}"
-                                         height="100" width="100"
-                                         class="img-circle"/>
+                                    <img src="{{ profile.profile_image.url }}" height="100" width="100" class="img-circle"/>
                                 </p>
 
-                                <p><a href="#" class="btn btn-primary"
-                                      style="width: 100px;">Friends</a></p>
+                                <p>
+                                    <a href="#" class="btn btn-primary" style="width: 100px;">Friends</a>
+                                </p>
 
-                                <p><a href="/user/{{ profile.user.username }}/post" class="btn btn-primary"
-                                      style="width: 100px;">Posts</a></p>
+                                <p>
+                                    <a href="/user/{{ profile.user.username }}/post" class="btn btn-primary" style="width: 100px;">Posts</a>
+                                </p>
                             </div>
                             <div class=" col-md-9 col-lg-9 ">
                                 <table class="table table-user-information">
@@ -57,18 +57,16 @@
                         </div>
                     </div>
                     <div class="panel-footer" style="height: 50px;">
-                        <form id="unregister_form" method="post"
-                              action="/user/{{ request_user.username }}/delete"></form>
+                        <form id="unregister_form" method="post" action="/user/{{ user.username }}/delete"></form>
                         {% if me %}
                             <span class="pull-right">
 
-                            <a href="/user/{{ request_user.username }}/update"
-                               type="button" class="btn btn-sm btn-warning">정보
+                            <a href="/user/{{ user.username }}/update" type="button" class="btn btn-sm btn-warning">정보
                                 수정</a>
-                            <form method="POST" class="form-inline" id="js-user-delete-form"
-                                  action="{% url 'user.delete' username=request_user.username %}">
-                                <button type="submit"
-                                   class="btn btn-sm btn-danger">탈퇴</button>
+                            <form method="POST" class="form-inline" id="js-user-delete-form" action="{% url 'user.delete' username=user.username %}">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    탈퇴
+                                </button>
                             </form>
                         </span>
                         {% endif %}

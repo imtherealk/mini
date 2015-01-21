@@ -6,18 +6,18 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                {% if not request_user.is_authenticated %}
+                {% if not user.is_authenticated %}
                     <form id="login_form" method="post" action="/login" class="form-inline navbar-form">
-                    <input type="text" class="form-control input-sm" name="username"  value="" placeholder="Username">
-                    <input type="password" class="form-control input-sm" name="password"  value="" placeholder="Password">
-                    <input type="submit" class="btn btn-default" value="Login"/>
-                </form>
+                        <input type="text" class="form-control input-sm" name="username" value="" placeholder="Username">
+                        <input type="password" class="form-control input-sm" name="password" value="" placeholder="Password">
+                        <input type="submit" class="btn btn-default" value="Login"/>
+                    </form>
                 {% else %}
                     <ul class="nav nav-pills" style="margin-top: 5px;">
                         <li>
-                            <a href="/user/{{ request_user.username }}/">{{ request_user.username }}</a>
+                            <a href="/user/{{ user.username }}/">{{ user.username }}</a>
                         </li>
-                        <li><a href="/user/{{ request_user.username }}/post">내
+                        <li><a href="/user/{{ user.username }}/post">내
                             타임라인</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown"
@@ -31,7 +31,7 @@
                                         탈퇴</a>
 
                                     <form id="unregister_form" method="post"
-                                          action="/user/{{ request_user.username }}/delete"></form>
+                                          action="/user/{{ user.username }}/delete"></form>
                                 </li>
                             </ul>
                         </li>

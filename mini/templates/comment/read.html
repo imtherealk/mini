@@ -1,11 +1,12 @@
 <div class="media">
     <a class="pull-left" href="#">
-        <img class="media-object" src="{{comment.writer.profile_image.url}}" alt="">
+        <img class="media-object" src="{{ comment.writer.profile_image.url }}" alt="">
     </a>
+
     <div class="media-body">
-        <h4 class="media-heading">{{comment.writer.username}}
-            <small>{{comment.created}}</small>
+        <h4 class="media-heading">{{ comment.writer.username }}
+            <small>{{ comment.created }}</small>
         </h4>
-        {{comment.content}}
+        {{ comment.content }}
     </div>
 </div>

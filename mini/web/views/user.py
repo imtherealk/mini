@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import functools
 from django.template import RequestContext
-from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response
@@ -53,10 +52,9 @@ def unregister(request, username=None):
 
 @login_required
 def read(request, username=None):
-    request_user = request.user
     user = m.User.objects.get(username=username)
 
-    if request_user == user:
+    if request.user == user:
         me = True
     else:
         me = False
@@ -65,9 +63,8 @@ def read(request, username=None):
     rel_status = profile.get_relationship_status_display()
     return render_to_response('user/profile.html',
                               {'profile': profile,
-                               'request_user': request_user,
                                'rel_status': rel_status,
-                               'me': me})
+                               'me': me}, RequestContext(request))
 
 
 @csrf_exempt
@@ -106,5 +103,4 @@ def update(request, username=None):
     return render_to_response(
         'user/update.html', {'profile': profile,
                              'edit_u_form': edit_u_form,
-                             'edit_p_form': edit_p_form,
-                             'request_user': request.user}, ctx)
+                             'edit_p_form': edit_p_form}, ctx)
