@@ -1,6 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
-from mini.web.models import UserProfile, Post, Comment
+from mini.web import models as m
 from django.forms import ClearableFileInput
 
 
@@ -22,7 +21,7 @@ class UserForm(forms.ModelForm):
         self.fields['email'].label = ''
 
     class Meta:
-        model = User
+        model = m.User
         fields = ('username', 'password', 'email')
         help_texts = {
             'username': '* (알파벳, 숫자, @/./+/-/_)',
@@ -48,7 +47,7 @@ class UserProfileForm(forms.ModelForm):
         self.fields['profile_image'].label = '프로필 사진'
 
     class Meta:
-        model = UserProfile
+        model = m.UserProfile
         fields = ('birth', 'relationship_status', 'profile_image')
         help_texts = {
             'birth': '(yyyy-mm-dd)',
@@ -68,7 +67,7 @@ class EditUserForm(forms.ModelForm):
         self.fields['email'].label = 'E-mail'
 
     class Meta:
-        model = User
+        model = m.User
         fields = ('email',)
         widgets = {
             'email': forms.TextInput(attrs={'class': 'form-control'}),
@@ -84,7 +83,7 @@ class EditProfileForm(forms.ModelForm):
         self.fields['profile_image'].label = '프로필 사진'
 
     class Meta:
-        model = UserProfile
+        model = m.UserProfile
         fields = ('birth', 'phone', 'relationship_status', 'profile_image')
         help_texts = {
             'birth': '(yyyy-mm-dd)',
@@ -106,7 +105,7 @@ class PostForm(forms.ModelForm):
         self.fields['image'].label = '사진'
 
     class Meta:
-        model = Post
+        model = m.Post
         fields = ('content', 'image')
         help_texts = {
         }

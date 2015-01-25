@@ -7,7 +7,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">{{profile.user.username}}</h3>
                 </div>
-                <form method="post" action="/user/{{profile.user.username}}/update" enctype="multipart/form-data" class="form-horizontal" role="form">
+                <form method="post" action="{% url 'user.update' username=profile.user.username %}" enctype="multipart/form-data" class="form-horizontal" role="form">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-3 col-lg-3 " align="center">
