@@ -5,6 +5,11 @@
     <script type="text/javascript" src="{% static 'js/user/profile.js' %}"></script>
 {% endblock js %}
 
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user/profile.css' %}"/>
+{% endblock css %}
+
 {% block main %}
     <div class="container">
         <div class="row">
@@ -57,18 +62,16 @@
                         </div>
                     </div>
                     <div class="panel-footer" style="height: 50px;">
-                        <form id="unregister_form" method="post" action="/user/{{ user.username }}/delete"></form>
                         {% if me %}
                             <span class="pull-right">
-
-                            <a href="/user/{{ user.username }}/update" type="button" class="btn btn-sm btn-warning">정보
-                                수정</a>
-                            <form method="POST" class="form-inline" id="js-user-delete-form" action="{% url 'user.delete' username=user.username %}">
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    탈퇴
-                                </button>
-                            </form>
-                        </span>
+                                <a href="/user/{{ user.username }}/update" type="button" class="btn btn-sm btn-warning">정보
+                                    수정</a>
+                                <form method="POST" id="mini-form-unregister" action="{% url 'user.delete' username=user.username %}">
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        탈퇴
+                                    </button>
+                                </form>
+                            </span>
                         {% endif %}
                     </div>
                 </div>

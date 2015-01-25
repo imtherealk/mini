@@ -1,0 +1,42 @@
+{% extends "default/default.html" %}
+{% load staticfiles %}
+{% block style %}
+    {{ block.super }}
+
+    <!-- Default CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}"/>
+
+{% endblock style %}
+
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript">
+    var require = {
+        "baseUrl": '{% static 'libs' %}',
+        "paths": {
+            app: '../js/app',
+            jquery: 'jquery/jquery.min',
+            bootstrap: 'bootstrap/js/bootstrap.min'
+        },
+        "map": {
+            '*': {
+                'css': 'require-css/css.min'
+            }
+        },
+        "shim": {
+            'bootstrap': ['jquery', 'css!{% static 'libs/bootstrap/css/bootstrap.min.css' %}']
+        }
+    }
+    </script>
+    <script type="text/javascript" src="/static/libs/requirejs/require.min.js"></script>
+    <script type="text/javascript" src="/static/js/default/default.js"></script>
+{% endblock js %}
+
+{% block body %}
+    {% include 'default/top.html' %}
+    <div id="main">
+        {% block main %}
+        {% endblock main %}
+    </div>
+{% endblock body %}
+

@@ -15,24 +15,15 @@
                 {% else %}
                     <ul class="nav nav-pills" style="margin-top: 5px;">
                         <li>
-                            <a href="/user/{{ user.username }}/">{{ user.username }}</a>
+                            <a href="/user/{{ user.username }}/" style="color: #000000">{{ user.username }}</a>
                         </li>
-                        <li><a href="/user/{{ user.username }}/post">내
+                        <li><a href="/user/{{ user.username }}/post" style="color: #000000">내
                             타임라인</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown"
                                href="#"><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/logout">로그아웃</a></li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="javascript:{document.getElementById('unregister_form').submit();}"
-                                       onclick="return confirm('Are you sure?');">회원
-                                        탈퇴</a>
-
-                                    <form id="unregister_form" method="post"
-                                          action="/user/{{ user.username }}/delete"></form>
-                                </li>
                             </ul>
                         </li>
                     </ul>

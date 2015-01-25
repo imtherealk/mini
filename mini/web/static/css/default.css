@@ -1,3 +1,6 @@
 #main {
     padding-top: 60px;
 }
+.navbar-fixed-top {
+    background-color: #f5f5ff;
+}

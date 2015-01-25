@@ -59,7 +59,7 @@ ROOT_URLCONF = 'mini.urls'
 WSGI_APPLICATION = 'mini.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(ROOT_PATH, 'templates').replace('\\', '/'),
+    os.path.join(ROOT_PATH, 'web', 'templates'),
 )
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
