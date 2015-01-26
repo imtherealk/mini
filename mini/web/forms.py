@@ -7,6 +7,22 @@ class MyClearableFileInput(ClearableFileInput):
     template_with_initial = '%(input)s'
 
 
+class LoginForm(forms.ModelForm):
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control',
+                                          'placeholder': 'Password'}),
+        error_messages={'required': '비밀번호를 입력해주세요'},
+        label='')
+
+    class Meta:
+        model = m.User
+        fields = ('username', 'password')
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control',
+                                               'placeholder': 'Username'}),
+        }
+
+
 class UserForm(forms.ModelForm):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control',

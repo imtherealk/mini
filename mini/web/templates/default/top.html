@@ -7,10 +7,10 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 {% if not user.is_authenticated %}
-                    <form id="login_form" method="post" action="{% url 'login' %}" class="form-inline navbar-form">
-                        <input type="text" class="form-control input-sm" name="username" value="" placeholder="Username">
-                        <input type="password" class="form-control input-sm" name="password" value="" placeholder="Password">
-                        <input type="submit" class="btn btn-default" value="Login"/>
+                    <form method="post" action="{% url 'login' %}" class="form-inline navbar-form">
+                        {{ login_form.username }}
+                        {{ login_form.password }}
+                        <button type="submit" class="btn btn-default">Login</button>
                     </form>
                 {% else %}
                     <ul class="nav nav-pills" style="margin-top: 5px;">

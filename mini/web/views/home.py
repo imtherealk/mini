@@ -10,8 +10,6 @@ def home(request):
         return render_to_response('post/newsfeed.html',
                                   {}, ctx)
 
-    user_form = f.UserForm()
-    profile_form = f.UserProfileForm()
-
-    return render_to_response('home.html', {'user_form': user_form,
-                                            'profile_form': profile_form}, ctx)
+    return render_to_response('home.html', {'user_form': f.UserForm(),
+                                            'profile_form': f.UserProfileForm(),
+                                            'login_form': f.LoginForm()}, ctx)
