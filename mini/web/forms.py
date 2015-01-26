@@ -15,7 +15,7 @@ class LoginForm(forms.ModelForm):
         label='')
 
     class Meta:
-        model = m.User
+        model = m.MyUser
         fields = ('username', 'password')
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control',
@@ -35,12 +35,16 @@ class UserForm(forms.ModelForm):
         super(UserForm, self).__init__(*args, **kwargs)
         self.fields['username'].label = ''
         self.fields['email'].label = ''
+        self.fields['birth'].label = ''
+        self.fields['relationship_status'].label = '상태'
+        self.fields['profile_image'].label = '프로필 사진'
 
     class Meta:
-        model = m.User
-        fields = ('username', 'password', 'email')
+        model = m.MyUser
+        fields = ('username', 'password', 'email', 'birth', 'relationship_status', 'profile_image')
         help_texts = {
             'username': '* (알파벳, 숫자, @/./+/-/_)',
+            'birth': '(yyyy-mm-dd)',
         }
         error_messages = {
             'username': {
@@ -52,23 +56,6 @@ class UserForm(forms.ModelForm):
                                                'placeholder': 'Username'}),
             'email': forms.TextInput(attrs={'class': 'form-control',
                                             'placeholder': 'E-mail'}),
-        }
-
-
-class UserProfileForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(UserProfileForm, self).__init__(*args, **kwargs)
-        self.fields['birth'].label = ''
-        self.fields['relationship_status'].label = '상태'
-        self.fields['profile_image'].label = '프로필 사진'
-
-    class Meta:
-        model = m.UserProfile
-        fields = ('birth', 'relationship_status', 'profile_image')
-        help_texts = {
-            'birth': '(yyyy-mm-dd)',
-        }
-        widgets = {
             'profile_image': MyClearableFileInput(),
             'birth': forms.TextInput(attrs={'class': 'form-control',
                                             'placeholder': 'Date of Birth'}),
@@ -81,36 +68,25 @@ class EditUserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EditUserForm, self).__init__(*args, **kwargs)
         self.fields['email'].label = 'E-mail'
-
-    class Meta:
-        model = m.User
-        fields = ('email',)
-        widgets = {
-            'email': forms.TextInput(attrs={'class': 'form-control'}),
-        }
-
-
-class EditProfileForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(EditProfileForm, self).__init__(*args, **kwargs)
         self.fields['birth'].label = '생일'
         self.fields['phone'].label = '전화번호'
         self.fields['relationship_status'].label = '상태'
         self.fields['profile_image'].label = '프로필 사진'
 
     class Meta:
-        model = m.UserProfile
-        fields = ('birth', 'phone', 'relationship_status', 'profile_image')
-        help_texts = {
-            'birth': '(yyyy-mm-dd)',
-            'profile_image': ''
-        }
+        model = m.MyUser
+        fields = ('email', 'birth', 'phone', 'relationship_status', 'profile_image')
         widgets = {
+            'email': forms.TextInput(attrs={'class': 'form-control'}),
             'profile_image': MyClearableFileInput(),
             'birth': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
             'relationship_status': forms.Select(
-                attrs={'class': 'form-control'})
+                attrs={'class': 'form-control'}),
+        }
+        help_texts = {
+            'birth': '(yyyy-mm-dd)',
+            'profile_image': ''
         }
 
 

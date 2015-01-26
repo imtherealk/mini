@@ -3,7 +3,7 @@
         <div class="col-lg-7" style="padding-top:10px; background-color: #ffffff; border: 1px solid #e1e1e1; border-radius: 5px">
             <h4 class="media-heading">
                 <a href="{% url 'user.read' username=post.writer.username %}" style="text-decoration: none;">
-                    <img class="media-object" src="{{ profile.profile_image.url }}" width="64" height="64">
+                    <img class="media-object" src="{{ post.writer.profile_image.url }}" width="64" height="64">
                     {{ post.writer.username }}
                 </a>
                 <a href="{% url 'post.read' post_id=post.id %}">

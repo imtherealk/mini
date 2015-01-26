@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 
 
@@ -16,14 +16,13 @@ class Model(models.Model):
         abstract = True
 
 
-class UserProfile(Model):
+class MyUser(AbstractUser):
     RELATIONSHIP_STATUSES = (
         ('y', '연애중'),
         ('n', '싱글'),
         ('m', '결혼'),
     )
 
-    user = models.OneToOneField(User)
     relationship_status = models.CharField(max_length=1, null=True, blank=True,
                                            choices=RELATIONSHIP_STATUSES)
     IMAGE_DIR = 'profile-images'
@@ -36,7 +35,7 @@ class UserProfile(Model):
 
 
 class Post(Model):
-    writer = models.ForeignKey(User)
+    writer = models.ForeignKey(settings.AUTH_USER_MODEL)
     content = models.TextField(null=False)
     created = models.DateTimeField(auto_now_add=True)
     IMAGE_DIR = 'post-images'
@@ -44,29 +43,29 @@ class Post(Model):
 
 
 class Comment(Model):
-    writer = models.ForeignKey(User)
+    writer = models.ForeignKey(settings.AUTH_USER_MODEL)
     content = models.TextField(null=False)
     created = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(Post)
 
 
 class Friend(Model):
-    first_user = models.ForeignKey(User, related_name='+')
-    second_user = models.ForeignKey(User, related_name='+')
+    first_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
+    second_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
     created = models.DateTimeField(auto_now_add=True)
 
 
 class FriendRequest(Model):
-    from_user = models.ForeignKey(User, related_name='+')
-    to_user = models.ForeignKey(User, related_name='+')
+    from_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
+    to_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
     created = models.DateTimeField(auto_now_add=True)
 
 
 class PostLike(Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     post = models.ForeignKey(Post)
 
 
 class CommentLike(Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     comment = models.ForeignKey(Comment)

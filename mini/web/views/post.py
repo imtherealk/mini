@@ -33,23 +33,25 @@ def write(request):
 def read(request, post_id=None):
     ctx = RequestContext(request)
     post = m.Post.objects.get(id=int(post_id))
-    writer = post.writer
-    profile = m.UserProfile.objects.get(user=writer)
+    comments = m.Comment.objects.filter(post=post)
 
     return render_to_response('post/read.html',
-                              {'post': post, 'profile': profile}, ctx)
+                              {'post': post, 'comments': comments}, ctx)
 
 
 def timeline(request, username=None):
     ctx = RequestContext(request)
-    writer = m.User.objects.get(username=username)
-    profile = m.UserProfile.objects.get(user=writer)
+    writer = m.MyUser.objects.get(username=username)
     posts = m.Post.objects.filter(writer=writer).order_by('-created')
-
+    
     return render_to_response('post/timeline.html',
-                              {'posts': posts, 'profile': profile,
-                               'post_form': f.PostForm()}, ctx)
+                              {'posts': posts, 'post_form': f.PostForm(),
+                               'comment_form': f.CommentForm()}, ctx)
 
 
 def newsfeed(request):
+    pass
+
+
+def like(request, post_id=None):
     pass

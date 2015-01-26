@@ -11,5 +11,4 @@ def home(request):
                                   {}, ctx)
 
     return render_to_response('home.html', {'user_form': f.UserForm(),
-                                            'profile_form': f.UserProfileForm(),
                                             'login_form': f.LoginForm()}, ctx)
