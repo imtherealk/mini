@@ -34,7 +34,7 @@ def register(request):
         user_form = f.UserForm()
 
     return render_to_response(
-        'home.html', {'user_form': user_form, 'registered': registered}, ctx)
+        'home.html', {'user_form': user_form, 'registered': registered, 'login_form': f.LoginForm()}, ctx)
 
 
 @csrf_exempt

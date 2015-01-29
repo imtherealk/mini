@@ -1,0 +1,12 @@
+#mini-register-panel {
+    width: 480px;
+    float:right;
+    background-color: #f7f7f7;
+    border:none;
+    box-shadow:none;
+}
+#mini-info {
+    display:inline-block;
+    width: 100%;
+    background-color: #f7f7f7;
+}

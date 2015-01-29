@@ -22,3 +22,11 @@
     margin-top: 20px;
 }
 
+.mini-profile-footer{
+    background-color: #f5f5e5;
+    height: 50px;
+    display: block;
+}
+.mini-profile-btn {
+    width: 100px;
+}

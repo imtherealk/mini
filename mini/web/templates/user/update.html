@@ -1,14 +1,14 @@
 {% extends "default/base.html" %}
 {% load staticfiles %}
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user/profile.css' %}"/>
+{% endblock style %}
 {% block js %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'js/user/profile.js' %}"></script>
 {% endblock js %}
 
-{% block css %}
-    {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/user/profile.css' %}"/>
-{% endblock css %}
 
 {% block main %}
     <div class="container">
@@ -53,9 +53,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-footer" style="height: 50px;">
+                        <div class="panel-footer mini-profile-footer">
                             <span class="pull-right">
-                            <input type="submit" name="submit" class="btn btn-sm btn-primary" value="저장"/>
+                            <button type="submit" name="submit" class="btn btn-sm btn-primary">저장</button>
                             </span>
                         </div>
                     </form>

@@ -16,3 +16,9 @@
     background-color: transparent;
     border: none;
 }
+.inline {
+    display: inline;
+}
+.no-decoration {
+    text-decoration: none;
+}

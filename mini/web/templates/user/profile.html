@@ -25,11 +25,11 @@
                                 </p>
 
                                 <p>
-                                    <a href="#" class="btn btn-primary" style="width: 100px;">Friends</a>
+                                    <a href="#" class="btn btn-primary mini-profile-btn">Friends</a>
                                 </p>
 
                                 <p>
-                                    <a href="{% url 'timeline' username=profile.username %}" class="btn btn-primary" style="width: 100px;">Posts</a>
+                                    <a href="{% url 'timeline' username=profile.username %}" class="btn btn-primary mini-profile-btn">Posts</a>
                                 </p>
                             </div>
                             <div class=" col-md-9 col-lg-9 ">
@@ -60,13 +60,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-footer" style="height: 50px;">
+                    <div class="panel-footer mini-profile-footer">
                         {% if me %}
                             <span class="pull-right">
-                                <a href="{% url 'user.update' username=user.username %}" type="button" class="btn btn-sm btn-warning">정보
+                                <a href="{% url 'user.update' username=user.username %}" type="button" class="btn btn-sm btn-warning mini-profile-btn">정보
                                     수정</a>
-                                <form method="POST" id="mini-form-unregister" action="{% url 'user.delete' username=user.username %}">
-                                    <button type="submit" class="btn btn-sm btn-danger">
+                                <form class="inline" method="POST" id="mini-form-unregister" action="{% url 'user.delete' username=user.username %}">
+                                    <button type="submit" class="btn btn-sm btn-danger mini-profile-btn">
                                         탈퇴
                                     </button>
                                 </form>

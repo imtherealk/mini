@@ -1,10 +1,10 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-7" style="padding:10px 10px 10px 10px; background-color: #ffffff; border: 1px solid #e1e1e1; border-radius: 5px">
+            <div class="col-lg-7 mini-post-write">
                 <form method="post" action="{% url 'post.write' %}" enctype="multipart/form-data" class="form-horizontal" role="form">
                     {{ post_form.as_p }}
-                    <div class="panel-footer" style="height: 50px; background-color: #f5f5e5">
+                    <div class="panel-footer mini-post-write-footer">
                         <div class="pull-right">
                             <input type="submit" name="submit" class="btn btn-default" value="확인"/>
                         </div>
