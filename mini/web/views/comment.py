@@ -62,6 +62,8 @@ def update(request, comment_id=None):
         'post/read.html', {'post': post, 'comment_form': comment_form}, ctx)
 
 
+@csrf_exempt
+@login_required
 def delete(request, comment_id=None):
     comment = m.Comment.objects.get(id=int(comment_id))
     writer = comment.writer
@@ -69,7 +71,8 @@ def delete(request, comment_id=None):
     if request.user == writer:
         comment.delete()
     #댓글 삭제
-    pass
+    return render_to_response(
+        'post/read.html', {'post': comment.post, 'comment_form': f.CommentForm()}, RequestContext(request))
 
 
 def like(request, comment_id=None):

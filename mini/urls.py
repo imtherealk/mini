@@ -28,6 +28,8 @@ urlpatterns = patterns(
     # Comment
     url(r'^post/(?P<post_id>\d+)/comment/$', 'mini.web.views.comment.write', name='comment.write'),
     url(r'^post/(?P<post_id>\d+)/comment/$', 'mini.web.views.comment.read', name='comment.read'),
+    url(r'^comment/(?P<comment_id>\d+)/update', 'mini.web.views.comment.update', name='comment.update'),
+    url(r'^comment/(?P<comment_id>\d+)/delete', 'mini.web.views.comment.delete', name='comment.delete'),
 
     # Admin
     url(r'^admin/', include(admin.site.urls)),

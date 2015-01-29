@@ -4,9 +4,21 @@
             <a class="pull-left" href="{% url 'user.read' username=comment.writer.username %}">
                 <img class="media-object" src="{{ comment.writer.profile_image.url }}" width="48" height="48" alt="">
             </a>
+            {% if user == comment.writer %}
+            <span class="pull-right">
+                    <a href="{% url 'comment.update' comment_id=comment.id %}"><span class="glyphicon glyphicon-edit"></span></a>
+                    <form method="POST" id="mini-form-cmt-delete" action="{% url 'comment.delete' comment_id=comment.id %}">
+                          <button type="submit" class="mini-btn-icon">
+                              <a href="{% url 'post.delete' post_id=post.id %}"><span class="glyphicon glyphicon-remove"></span></a>
+                          </button>
+                    </form>
+            </span>
+            {% endif %}
             <div class="media-body">
                 <h4 class="media-heading">{{ comment.writer.username }}
-                    <small>{{ comment.created }}</small>
+                    <small>
+                        {{ comment.created }}
+                    </small>
                 </h4>
                 {{ comment.content }}
             </div>

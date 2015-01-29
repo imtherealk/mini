@@ -47,7 +47,7 @@ def update(request, post_id=None):
     post = m.Post.objects.get(id=int(post_id))
     writer = post.writer
     if request.user != writer:
-        pass
+        return redirect('post.read', post_id=post.id)
 
     updated = False
 
