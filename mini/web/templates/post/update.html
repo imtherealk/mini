@@ -1,0 +1,6 @@
+    <div class="post-update">
+        <form method="POST" action="{% url 'post.update' post_id=post.id %}" class="form-horizontal" enctype="multipart/form-data">
+            <button type="submit" class="btn-primary pull-right">수정 완료</button>
+            {{ post_form }}
+        </form>
+    </div>

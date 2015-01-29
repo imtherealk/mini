@@ -33,10 +33,51 @@ def write(request):
 def read(request, post_id=None):
     ctx = RequestContext(request)
     post = m.Post.objects.get(id=int(post_id))
-    comments = m.Comment.objects.filter(post=post)
+    comments = m.Comment.objects.filter(post=post).order_by('created')
 
     return render_to_response('post/read.html',
-                              {'post': post, 'comments': comments}, ctx)
+                              {'post': post, 'comments': comments,
+                               'comment_form': f.CommentForm()}, ctx)
+
+
+@csrf_exempt
+@login_required
+def update(request, post_id=None):
+    ctx = RequestContext(request)
+    post = m.Post.objects.get(id=int(post_id))
+    writer = post.writer
+    if request.user != writer:
+        pass
+
+    updated = False
+
+    if request.method == 'POST':
+        post_form = f.PostForm(request.POST, request.FILES, instance=post)
+
+        if post_form.is_valid():
+            post_form.save()
+
+            updated = True
+
+    else:
+        post_form = f.PostForm(instance=post)
+
+    if updated:
+        return redirect('post.read', post_id=post.id)
+
+    return render_to_response(
+        'post/read.html', {'post': post, 'post_form': post_form, 'update': True,
+                           'comment_form': f.CommentForm()}, ctx)
+
+
+@login_required
+def delete(request, post_id=None):
+    post = m.Post.objects.get(id=int(post_id))
+    writer = post.writer
+    if request.user == writer:
+        post.delete()
+
+    return redirect('timeline', username=writer.username)
 
 
 def timeline(request, username=None):

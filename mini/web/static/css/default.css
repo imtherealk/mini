@@ -1,6 +1,17 @@
 #main {
     padding-top: 60px;
 }
-.navbar-fixed-top {
+#mini-top-bgcolor {
     background-color: #f5f5ff;
+}
+#mini-top-title {
+    font-size: 2em;
+    font-family: courier, serif;
+}
+.mini-btn-icon {
+    display: inline;
+    padding: 0;
+    margin-bottom: 0;
+    background-color: #ffffff;
+    border: none;
 }

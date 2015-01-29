@@ -22,6 +22,12 @@ urlpatterns = patterns(
     url(r'^post/$', 'mini.web.views.post.write', name='post.write'),
     url(r'^post/(?P<post_id>\d+)/$', 'mini.web.views.post.read', name='post.read'),
     url(r'^user/(?P<username>\w+)/post', 'mini.web.views.post.timeline', name='timeline'),
+    url(r'^post/(?P<post_id>\d+)/update', 'mini.web.views.post.update', name='post.update'),
+    url(r'^post/(?P<post_id>\d+)/delete', 'mini.web.views.post.delete', name='post.delete'),
+
+    # Comment
+    url(r'^post/(?P<post_id>\d+)/comment/$', 'mini.web.views.comment.write', name='comment.write'),
+    url(r'^post/(?P<post_id>\d+)/comment/$', 'mini.web.views.comment.read', name='comment.read'),
 
     # Admin
     url(r'^admin/', include(admin.site.urls)),

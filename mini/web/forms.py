@@ -114,3 +114,13 @@ class PostForm(forms.ModelForm):
                                                       'height: 50px;',
                                              'placeholder': "What's up?"})
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = m.Comment
+        fields = ('content',)
+
+        widgets = {
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': '1'})
+        }

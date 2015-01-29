@@ -1,5 +1,13 @@
 {% extends 'default/base.html' %}
-
+{% load staticfiles %}
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/post/post.css' %}"/>
+{% endblock style %}
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/post/post.js' %}"></script>
+{% endblock js %}
 {% block main %}
     {% include 'post/write.html' %}
     {% for post in posts %}
