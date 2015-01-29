@@ -38,11 +38,12 @@ def read(request, post_id=None):
     #댓글 목록 가져오기
 
 
+@csrf_exempt
 @login_required
 def update(request, comment_id=None):
     #ajax
     ctx = RequestContext(request)
-    comment = m.Post.objects.get(id=int(comment_id))
+    comment = m.Comment.objects.get(id=int(comment_id))
     writer = comment.writer
     post = comment.post
 
@@ -54,12 +55,14 @@ def update(request, comment_id=None):
 
         if comment_form.is_valid():
             comment_form.save()
+            return redirect('post.read', post_id=post.id)
 
     else:
         comment_form = f.CommentForm(instance=comment)
 
     return render_to_response(
-        'post/read.html', {'post': post, 'comment_form': comment_form}, ctx)
+        'post/read.html', {'post': post, 'comment_update_form': comment_form,
+                           'comment_form': f.CommentForm(), 'update_comment': comment}, ctx)
 
 
 @csrf_exempt
@@ -71,8 +74,7 @@ def delete(request, comment_id=None):
     if request.user == writer:
         comment.delete()
     #댓글 삭제
-    return render_to_response(
-        'post/read.html', {'post': comment.post, 'comment_form': f.CommentForm()}, RequestContext(request))
+    return redirect('post.read', post_id=comment.post.id)
 
 
 def like(request, comment_id=None):

@@ -15,12 +15,16 @@
             </span>
             {% endif %}
             <div class="media-body">
+                {% if comment == update_comment %}
+                    {% include 'comment/update.html' %}
+                {% else %}
                 <h4 class="media-heading">{{ comment.writer.username }}
                     <small>
                         {{ comment.created }}
                     </small>
                 </h4>
                 {{ comment.content }}
+                {% endif %}
             </div>
         </div>
     {% endfor %}

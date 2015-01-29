@@ -1,0 +1,4 @@
+<form method="POST" action="{% url 'comment.update' comment_id=comment.id %}" class="form-inline">
+    {{ comment_update_form.content }}
+    <button type="submit" class="btn-primary">수정</button>
+</form>

@@ -12,16 +12,16 @@ POST /user/{{user.id}}/update : 프로필 update ㅇ
 POST /post/ : 글 쓰기 ㅇ
 GET /user/{{user.id}}/post/ : 해당 유저 글 목록 보기 ㅇ
 GET /post/{{post.id}} : 해당 글 읽기 ㅇ
-GET /post/{{post.id}}/update : 글 수정 form
-POST /post/{{post.id}}/update : 글 update
-POST /post/{{post.id}}/delete : 글 삭제
+GET /post/{{post.id}}/update : 글 수정 form ㅇ
+POST /post/{{post.id}}/update : 글 update ㅇ
+POST /post/{{post.id}}/delete : 글 삭제 ㅇ
 POST /post/{{post.id}}/like : 글 좋아요
  
-POST /post/{{post.id}}/comment/ : 해당 글에 댓글 쓰기
+POST /post/{{post.id}}/comment/ : 해당 글에 댓글 쓰기 ㅇ
 GET /post/{{post.id}}/comment/ : 해당 글의 댓글 목록 보기
-GET /comment/{{comment.id}}/update : 해당 댓글 수정 form
-POST /comment/{{comment.id}}/update : 해당 댓글 update
-POST /comment/{{comment.id}}/delete : 해당 댓글 삭제
+GET /comment/{{comment.id}}/update : 해당 댓글 수정 form ㅇ
+POST /comment/{{comment.id}}/update : 해당 댓글 update ㅇ
+POST /comment/{{comment.id}}/delete : 해당 댓글 삭제 ㅇ
 POST /comment/{{comment.id}}/like : 댓글 좋아요
  
 GET /user/{{user.id}}/friend/ : 친구 목록 보기
