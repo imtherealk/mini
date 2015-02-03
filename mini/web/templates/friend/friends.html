@@ -1,0 +1,7 @@
+{% extends 'default/base.html' %}
+
+{% block main %}
+    {% for f in friends %}
+        {{ f.username }}
+    {% endfor %}
+{% endblock main %}

@@ -1,0 +1,14 @@
+{% extends 'default/base.html' %}
+
+{% block main %}
+    {% for req in requests %}
+        {{ req.from_user.username }}
+        {{ req.created }}
+        <form method="POST" action="{% url 'friend.accept' from_username=req.from_user.username %}">
+            <button type="submit" class="btn-primary">수락</button>
+        </form>
+        <form method="POST" action="{% url 'friend.decline' from_username=req.from_user.username %}">
+            <button type="submit" class="btn-primary">거절</button>
+        </form>
+    {% endfor %}
+{% endblock main %}

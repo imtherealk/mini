@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from mini.web import forms as f
 from mini.web import models as m
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 @csrf_exempt
@@ -84,14 +85,25 @@ def timeline(request, username=None):
     ctx = RequestContext(request)
     writer = m.MyUser.objects.get(username=username)
     posts = m.Post.objects.filter(writer=writer).order_by('-created')
-    
+
     return render_to_response('post/timeline.html',
                               {'posts': posts, 'post_form': f.PostForm(),
                                'comment_form': f.CommentForm()}, ctx)
 
 
 def newsfeed(request):
-    pass
+    ctx = RequestContext(request)
+    posts = m.Post.objects.filter(writer=request.user)
+    friends = m.Friend.objects.filter(Q(first_user=request.user) | Q(second_user=request.user))
+
+    for friend in friends:
+        posts = posts | m.Post.objects.filter(Q(writer=friend.first_user) | Q(writer=friend.second_user))
+
+    posts = posts.order_by('-created')
+
+    return render_to_response('post/timeline.html',
+                              {'posts': posts, 'post_form': f.PostForm(),
+                               'comment_form': f.CommentForm()}, ctx)
 
 
 def like(request, post_id=None):
