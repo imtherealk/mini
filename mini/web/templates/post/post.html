@@ -42,12 +42,10 @@
             </div>
 
                 <div class="mini-post-footer">
-                    <a href="{% url 'comment.read' post_id=post.id %}" id="comment">댓글 달기</a>
-
-                    <div id="comment-box-{{ post.id }}">
-                        {% include 'comment/write.html' %}
-                        {% include 'comment/read.html' %}
-                    </div>
+                    <a href="{% url 'comment.read' post_id=post.id %}" id="mini-comment">댓글</a>
+                    {% include 'comment/write.html' %}
+                    <input type="hidden" id="post-id" value="{{ post.id }}">
+                    <div id="comment-box-{{ post.id }}">{% include 'comment/read.html' %}</div>
                 </div>
              </div>
         </div>

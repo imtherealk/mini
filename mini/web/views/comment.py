@@ -34,7 +34,9 @@ def read(request, post_id=None):
     comments = m.Comment.objects.filter(post=post).order_by('created')
 
     if request.is_ajax():
-        return render('comment/read.html', {'post': post, 'comments': comments}, ctx)
+        return render_to_response('comment/read.html', {'post': post, 'comments': comments, 'with_layout': False}, ctx)
+    else:
+        return render_to_response('post/read.html', {'comment_form': f.CommentForm(), 'post': post}, ctx)
     #댓글 목록 가져오기
 
 
