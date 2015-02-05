@@ -1,0 +1,28 @@
+.mini-friend-list {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+
+    -webkit-column-gap: 5px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 5px; /* Firefox */
+    column-gap: 5px;
+}
+
+.mini-friend-list-item{
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.mini-unfriend-btn {
+    float:right;
+    margin-right: 5px;
+}

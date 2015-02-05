@@ -9,7 +9,7 @@ require(['jquery'], function($) {
             var post_id = document.getElementById("post-id").value;
             var elt = $('#comment-box-'+post_id);
 
-            elt.load(this.href).filter('div.comment-list');
+            elt.load(this.href);
             elt.toggle();
             return false;
         });

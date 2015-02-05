@@ -21,7 +21,7 @@
                         <div class="col-md-4">
                         {% if not me %}
                             <form method="POST" action="{% url 'friend.request' to_username=profile.username %}">
-                            <button type="submit" class="btn-primary pull-right">친구 요청</button></form>
+                            <button type="submit" class="btn btn-primary pull-right">친구 요청</button></form>
                         {% endif %}
                         </div>
                     </div>

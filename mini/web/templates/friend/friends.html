@@ -1,7 +1,35 @@
 {% extends 'default/base.html' %}
-
+{% load staticfiles %}
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/friend/friends.css' %}"/>
+{% endblock style %}
 {% block main %}
-    {% for f in friends %}
-        {{ f.username }}
-    {% endfor %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">친구</div>
+            <div class="panel-body" style="padding: auto;">
+                <ul class="mini-friend-list list-group">
+                {% for f in friends %}
+                    <li class="mini-friend-list-item">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <a href="{% url 'user.read' username=f.username %}">
+                                    <img src="{{ f.profile_image.url }}" width="64" height="64">
+                                </a>
+                                <a href="{% url 'user.read' username=f.username %}">
+                                    {{ f.username }}
+                                </a>
+                            </div>
+                            <div class="col-md-3" style="padding:3% 0;">
+                                <button class="btn btn-primary mini-unfriend-btn">Unfriend</button>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
 {% endblock main %}
