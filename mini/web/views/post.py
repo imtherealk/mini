@@ -7,6 +7,9 @@ from mini.web import forms as f
 from mini.web import models as m
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import HttpResponse
+import json
+from django.shortcuts import get_object_or_404
 
 
 @csrf_exempt
@@ -72,6 +75,7 @@ def update(request, post_id=None):
 
 
 @login_required
+@csrf_exempt
 def delete(request, post_id=None):
     post = m.Post.objects.get(id=int(post_id))
     writer = post.writer
@@ -106,5 +110,18 @@ def newsfeed(request):
                                'comment_form': f.CommentForm()}, ctx)
 
 
+@csrf_exempt
 def like(request, post_id=None):
-    pass
+    user = request.user
+    post = get_object_or_404(m.Post, id=post_id)
+
+    user_liked, created = m.PostLike.objects.get_or_create(post=post, user=user)
+
+    if created is False:
+        user_liked.delete()
+
+    like_count = m.PostLike.objects.filter(post=post).count()
+
+    data = {'like_count': like_count}
+
+    return HttpResponse(json.dumps(data))

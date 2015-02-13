@@ -15,19 +15,18 @@ GET /post/{{post.id}} : 해당 글 읽기 ㅇ
 GET /post/{{post.id}}/update : 글 수정 form ㅇ
 POST /post/{{post.id}}/update : 글 update ㅇ
 POST /post/{{post.id}}/delete : 글 삭제 ㅇ
-POST /post/{{post.id}}/like : 글 좋아요
+POST /post/{{post.id}}/like : 글 좋아요 ㅇ
  
-POST /post/{{post.id}}/comment/ : 해당 글에 댓글 쓰기 ㅇ
-GET /post/{{post.id}}/comment/ : 해당 글의 댓글 목록 보기
-GET /comment/{{comment.id}}/update : 해당 댓글 수정 form ㅇ
+POST /post/{{post.id}}/comment/write : 해당 글에 댓글 쓰기 ㅇ
+GET /post/{{post.id}}/comment/ : 해당 글의 댓글 목록 보기 ㅇ
 POST /comment/{{comment.id}}/update : 해당 댓글 update ㅇ
 POST /comment/{{comment.id}}/delete : 해당 댓글 삭제 ㅇ
 POST /comment/{{comment.id}}/like : 댓글 좋아요
  
-GET /user/{{user.id}}/friend/ : 친구 목록 보기
-POST /friendrequest/{{to_user.id}} : 친구 요청
-GET /friendrequest/ : user에게 온 친구 요청 목록
-POST /friendrequest/{{friend_request.id}}/delete : 친구 요청 거절
-POST /friendrequest/{{friend_request.id}}/cancel : 친구 요청 취소
-POST /friend/friendrequest/{{from_user.id}} : 친구 요청 승인
-POST /friend/{{other_user.id}}/delete : user가 other_user를 친구에서 삭제
+GET /user/{{user.id}}/friend/ : 친구 목록 보기 ㅇ
+POST /friendrequest/{{to_user.id}} : 친구 요청 ㅇ
+GET /friendrequest/ : user에게 온 친구 요청 목록 ㅇ
+POST /friendrequest/{{friend_request.id}}/delete : 친구 요청 거절 
+POST /friendrequest/{{friend_request.id}}/cancel : 친구 요청 취소 
+POST /friend/friendrequest/{{from_user.id}} : 친구 요청 승인 ㅇ
+POST /friend/{{other_user.id}}/delete : user가 other_user를 친구에서 삭제 ㅇ

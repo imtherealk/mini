@@ -7,7 +7,7 @@
             {% if user == comment.writer %}
             <span class="pull-right">
                     <a href="{% url 'comment.update' comment_id=comment.id %}"><span class="glyphicon glyphicon-edit"></span></a>
-                    <form method="POST" id="mini-form-cmt-delete" action="{% url 'comment.delete' comment_id=comment.id %}">
+                    <form method="POST" class="mini-form-cmt-delete" action="{% url 'comment.delete' comment_id=comment.id %}">
                           <button type="submit" class="mini-btn-icon">
                               <a href="{% url 'post.delete' post_id=post.id %}"><span class="glyphicon glyphicon-remove"></span></a>
                           </button>

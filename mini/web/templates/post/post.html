@@ -1,53 +1,53 @@
-<div class="container mini-post" >
+<div class="container mini-post" data-id="{{ post.id }}">
     <div class="row">
         <div class="col-md-7 mini-post-col">
             <div class="mini-post-header">
-            <div class="row">
-                <div class="col-md-8">
-                    <h4 class="media-heading">
-                    <a href="{% url 'user.read' username=post.writer.username %}" class="no-decoration">
-                        <img class="media-object" src="{{ post.writer.profile_image.url }}" width="64" height="64">
-                        {{ post.writer.username }}
-                    </a>
-                    <a href="{% url 'post.read' post_id=post.id %}">
-                        <small>
-                            <span class="glyphicon glyphicon-time"></span> {{ post.created }}
-                        </small>
-                    </a>
-                    </h4>
-                </div>
-                <div class="col-md-4">
-                    {% if user == post.writer %}
-                    <span class="pull-right">
-                    <a href="{% url 'post.update' post_id=post.id %}"><span class="glyphicon glyphicon-edit"></span></a>
-                    <form method="POST" id="mini-form-post-delete" action="{% url 'post.delete' post_id=post.id %}">
-                          <button type="submit" class="mini-btn-icon">
-                              <a href="{% url 'post.delete' post_id=post.id %}"><span class="glyphicon glyphicon-remove"></span></a>
-                          </button>
-                    </form>
-                    </span>
-                    {% endif %}
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="media-heading">
+                        <a href="{% url 'user.read' username=post.writer.username %}" class="no-decoration">
+                            <img class="media-object" src="{{ post.writer.profile_image.url }}" width="64" height="64">
+                            {{ post.writer.username }}
+                        </a>
+                        <a href="{% url 'post.read' post_id=post.id %}">
+                            <small>
+                                <span class="glyphicon glyphicon-time"></span> {{ post.created }}
+                            </small>
+                        </a>
+                        </h4>
+                    </div>
+                    <div class="col-md-4">
+                        {% if user == post.writer %}
+                        <span class="pull-right">
+                        <a href="{% url 'post.update' post_id=post.id %}"><span class="glyphicon glyphicon-edit"></span></a>
+                        <form method="POST" class="mini-form-post-delete" action="{% url 'post.delete' post_id=post.id %}">
+                              <button type="submit" class="mini-btn-icon">
+                                  <a href="{% url 'post.delete' post_id=post.id %}"><span class="glyphicon glyphicon-remove"></span></a>
+                              </button>
+                        </form>
+                        </span>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-            <br/>
             <div class="mini-post-body">
-            {% if update %}
-                {% include 'post/update.html' %}
-            {% else %}
-                {% if post.image %}
-                    <img src="{{ post.image.url }}" width="500">
+                {% if update %}
+                    {% include 'post/update.html' %}
+                {% else %}
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" width="500">
+                    {% endif %}
+                    {{ post.content | linebreaks }}
                 {% endif %}
-                {{ post.content | linebreaks }}
-            {% endif %}
+                <a href="{% url 'post.like' post_id=post.id %}" class="post-like" name="{{ post.id }}">
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                </a>
             </div>
-
-                <div class="mini-post-footer">
-                    <a href="{% url 'comment.read' post_id=post.id %}" id="mini-comment">댓글</a>
-                    {% include 'comment/write.html' %}
-                    <input type="hidden" id="post-id" value="{{ post.id }}">
-                    <div id="comment-box-{{ post.id }}">{% include 'comment/read.html' %}</div>
-                </div>
-             </div>
+            <div class="mini-post-footer">
+                <a href="{% url 'comment.read' post_id=post.id %}" class="mini-comment">댓글</a>
+                {% include 'comment/write.html' %}
+                <div class="comment-box">{% include 'comment/read.html' %}</div>
+            </div>
         </div>
     </div>
 </div>

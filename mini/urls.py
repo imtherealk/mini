@@ -25,6 +25,7 @@ urlpatterns = patterns(
     url(r'^newsfeed/$', 'mini.web.views.post.newsfeed', name='newsfeed'),
     url(r'^post/(?P<post_id>\d+)/update', 'mini.web.views.post.update', name='post.update'),
     url(r'^post/(?P<post_id>\d+)/delete', 'mini.web.views.post.delete', name='post.delete'),
+    url(r'^post/(?P<post_id>\d+)/like', 'mini.web.views.post.like', name='post.like'),
 
     # Comment
     url(r'^post/(?P<post_id>\d+)/comment/write/$', 'mini.web.views.comment.write', name='comment.write'),
