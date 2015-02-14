@@ -15,7 +15,6 @@ def friend_request(request, to_username=None):
 
         request, created = m.FriendRequest.objects.get_or_create(from_user=from_user,
                                                                  to_user=to_user)
-
         if created is False:
             pass
 
@@ -29,12 +28,13 @@ def accept(request, from_username=None):
     if request.method == 'POST':
         from_user = m.MyUser.objects.get(username=from_username)
         to_user = request.user
-        request, created = m.Friend.objects.get_or_create(first_user=from_user, second_user=to_user)
+        friend, created = m.Friend.objects.get_or_create(first_user=from_user, second_user=to_user)
 
         if created is False:
             pass
-
-    return redirect('friend.read')
+        else:
+            m.FriendRequest.objects.get(from_user=from_user, to_user=to_user).save()
+    return redirect('friend.read', username=request.user.username)
 
 
 @csrf_exempt
@@ -63,7 +63,11 @@ def read(request, username=None):
 def request_list(request):
     ctx = RequestContext(request)
     user = request.user
+
     requests = m.FriendRequest.objects.filter(to_user=user)
+    for req in requests:
+        if req.accepted != req.created:
+            requests = requests.exclude(from_user=req.from_user)
 
     return render_to_response('friend/request_list.html', {'requests': requests}, ctx)
 

@@ -4,13 +4,8 @@ from django.conf import settings
 
 
 class Model(models.Model):
-    def __repr__(self):
-        module_name = __name__
-        class_name = type(self).__name__
-        return module_name + '.' + class_name + '(%s)' % self.id
-
     def __str__(self):
-        return repr(self)
+        return str(self.id)
 
     class Meta(object):
         abstract = True
@@ -58,6 +53,7 @@ class Friend(Model):
 class FriendRequest(Model):
     from_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
     to_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
+    accepted = models.DateTimeField(auto_now=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
 
