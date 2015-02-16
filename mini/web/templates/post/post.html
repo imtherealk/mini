@@ -40,7 +40,13 @@
                     {{ post.content | linebreaks }}
                 {% endif %}
                 <a href="{% url 'post.like' post_id=post.id %}" class="post-like" name="{{ post.id }}">
+                    좋아요
+                </a>
+                <a class="who-likes-post">
                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                    <span class="post-like-count">
+                    {% if post.likes != 0 %}{{ post.likes }}{% endif %}
+                    </span>
                 </a>
             </div>
             <div class="mini-post-footer">

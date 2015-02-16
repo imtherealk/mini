@@ -119,9 +119,12 @@ def like(request, post_id=None):
 
     if created is False:
         user_liked.delete()
+        post.likes -= 1
+    else:
+        post.likes += 1
 
-    like_count = m.PostLike.objects.filter(post=post).count()
+    post.save()
 
-    data = {'like_count': like_count}
+    data = {'like_count': post.likes}
 
     return HttpResponse(json.dumps(data))

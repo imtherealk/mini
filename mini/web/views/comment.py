@@ -90,9 +90,14 @@ def like(request, comment_id=None):
 
     if created is False:
         user_liked.delete()
+        comment.likes -= 1
+    else:
+        comment.likes += 1
 
-    like_count = m.CommentLike.objects.filter(comment=comment).count()
+    comment.save()
 
-    data = {'like_count': like_count}
+  # like_count = m.CommentLike.objects.filter(comment=comment).count()
+
+    data = {'like_count': comment.likes}
 
     return HttpResponse(json.dumps(data))

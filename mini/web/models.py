@@ -35,6 +35,7 @@ class Post(Model):
     created = models.DateTimeField(auto_now_add=True)
     IMAGE_DIR = 'post-images'
     image = models.ImageField(upload_to=IMAGE_DIR, null=True, blank=True)
+    likes = models.IntegerField(default=0)
 
 
 class Comment(Model):
@@ -42,6 +43,7 @@ class Comment(Model):
     content = models.TextField(null=False)
     created = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(Post)
+    likes = models.IntegerField(default=0)
 
 
 class Friend(Model):

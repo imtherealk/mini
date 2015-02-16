@@ -5,12 +5,19 @@ require(['jquery'], function ($) {
         });
     });
     $(function () {
-        $('.post-like').click(function(){
-            $.post($(this).attr('href'),
-                function(response, status){
-                    alert(response);
-                });
-            return false;
+        $('.mini-post').each(function() {
+            var likes = $(this).find('.post-like-count');
+            $(this).find('.post-like').click(function () {
+                $.post(this.href,
+                    function (response, status) {
+                        var json_response = $.parseJSON(response);
+                        if(json_response.like_count != '0')
+                        likes.text(json_response.like_count);
+                        else
+                        likes.text('');
+                    });
+                return false;
+            });
         });
     });
 });
