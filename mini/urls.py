@@ -32,7 +32,7 @@ urlpatterns = patterns(
     url(r'^post/(?P<post_id>\d+)/comment/$', 'mini.web.views.comment.read', name='comment.read'),
     url(r'^comment/(?P<comment_id>\d+)/update', 'mini.web.views.comment.update', name='comment.update'),
     url(r'^comment/(?P<comment_id>\d+)/delete', 'mini.web.views.comment.delete', name='comment.delete'),
-
+    url(r'^comment/(?P<comment_id>\d+)/like', 'mini.web.views.comment.like', name='comment.like'),
 
     # Friend
     url(r'^friendrequest/(?P<to_username>\w+)/$', 'mini.web.views.friend.friend_request', name='friend.request'),

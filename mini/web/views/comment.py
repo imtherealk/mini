@@ -3,10 +3,12 @@ from django.template import RequestContext
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response
-from django.shortcuts import render
 from mini.web import forms as f
 from mini.web import models as m
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+import json
+from django.shortcuts import get_object_or_404
 
 
 @csrf_exempt
@@ -79,5 +81,18 @@ def delete(request, comment_id=None):
     return redirect('post.read', post_id=comment.post.id)
 
 
+@csrf_exempt
 def like(request, comment_id=None):
-    pass
+    user = request.user
+    comment = get_object_or_404(m.Comment, id=comment_id)
+
+    user_liked, created = m.CommentLike.objects.get_or_create(comment=comment, user=user)
+
+    if created is False:
+        user_liked.delete()
+
+    like_count = m.CommentLike.objects.filter(comment=comment).count()
+
+    data = {'like_count': like_count}
+
+    return HttpResponse(json.dumps(data))

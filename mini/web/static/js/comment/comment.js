@@ -17,4 +17,15 @@ require(['jquery'], function($) {
             });
         });
     });
+    $(function(){
+        $(function () {
+        $('.comment-like').click(function(){
+            $.post($(this).attr('href'),
+                function(response, status){
+                    alert(response);
+                });
+            return false;
+        });
+    });
+    })
 });

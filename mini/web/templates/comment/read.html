@@ -18,12 +18,15 @@
                 {% if comment == update_comment %}
                     {% include 'comment/update.html' %}
                 {% else %}
-                <h4 class="media-heading">{{ comment.writer.username }}
-                    <small>
-                        {{ comment.created }}
-                    </small>
-                </h4>
-                {{ comment.content }}
+                    <h4 class="media-heading">{{ comment.writer.username }}
+                        <small>
+                            {{ comment.created }}
+                        </small>
+                    </h4>
+                    {{ comment.content }}
+                    <a href="{% url 'comment.like' comment_id=comment.id %}" class="comment-like" name="{{ comment.id }}">
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                    </a>
                 {% endif %}
             </div>
         </div>
