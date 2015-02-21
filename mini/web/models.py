@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from django.db.models import Q
 
 
 class Model(models.Model):
@@ -27,6 +28,10 @@ class MyUser(AbstractUser):
         default=settings.STATIC_URL+'images/default_profile.png')
     birth = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=11, null=True, blank=True)
+
+    def is_friend_of(self, user):
+        friendships = Friend.objects.filter(Q(first_user=self) | Q(second_user=self))
+        return friendships.filter(Q(first_user=user) | Q(second_user=user)).exists()
 
 
 class Post(Model):

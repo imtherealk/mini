@@ -8,7 +8,7 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">친구</div>
-            <div class="panel-body" style="padding: auto;">
+            <div class="panel-body">
                 <ul class="mini-friend-list list-group">
                 {% for f in friends %}
                     <li class="mini-friend-list-item">
@@ -21,8 +21,23 @@
                                     {{ f.username }}
                                 </a>
                             </div>
-                            <div class="col-md-3" style="padding:3% 0;">
-                                <button class="btn btn-primary mini-unfriend-btn">Unfriend</button>
+                            <div class="col-md-3" style="padding:3% 3%;">
+                                {% if f == user %}
+                                {% elif f in request_user_friends %}
+                                <div class="dropdown pull-right">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        친구
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a role="menuitem" href="{% url 'friend.delete' to_username=f.username %}">친구 끊기</a></li>
+                                    </ul>
+                                </div>
+                                {% else %}
+                                    <form method="POST" action="{% url 'friend.request' to_username=f.username %}">
+                                        <button type="submit" class="btn btn-primary pull-right">친구 요청</button>
+                                    </form>
+                                {% endif %}
                             </div>
                         </div>
                     </li>
@@ -30,6 +45,7 @@
                 </ul>
             </div>
         </div>
+
     </div>
 
 {% endblock main %}

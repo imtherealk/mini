@@ -19,9 +19,22 @@
                         <div class="col-md-8">
                         <h3 class="panel-title">{{ profile.username }}</h3></div>
                         <div class="col-md-4">
-                        {% if not me %}
-                            <form method="POST" action="{% url 'friend.request' to_username=profile.username %}">
-                            <button type="submit" class="btn btn-primary pull-right">친구 요청</button></form>
+                        {% if profile != user %}
+                            {% if is_friend %}
+                                <div class="dropdown pull-right">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    친구
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a role="menuitem" href="{% url 'friend.delete' to_username=profile.username %}">친구 끊기</a></li>
+                                </ul>
+                                </div>
+                            {% else %}
+                                <form method="POST" action="{% url 'friend.request' to_username=profile.username %}">
+                                    <button type="submit" class="btn btn-primary pull-right">친구 요청</button>
+                                </form>
+                            {% endif %}
                         {% endif %}
                         </div>
                     </div>
