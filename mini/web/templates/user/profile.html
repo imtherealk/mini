@@ -30,6 +30,10 @@
                                     <li><a role="menuitem" href="{% url 'friend.delete' to_username=profile.username %}">친구 끊기</a></li>
                                 </ul>
                                 </div>
+                            {% elif sent_request %}
+                                <form method="POST" action="{% url 'friend.cancel' to_username=profile.username %}">
+                                    <button type="submit" class="btn btn-primary pull-right">친구요청 취소</button>
+                                </form>
                             {% else %}
                                 <form method="POST" action="{% url 'friend.request' to_username=profile.username %}">
                                     <button type="submit" class="btn btn-primary pull-right">친구 요청</button>
@@ -83,7 +87,7 @@
                         </div>
                     </div>
                     <div class="panel-footer mini-profile-footer">
-                        {% if me %}
+                        {% if user == profile %}
                             <span class="pull-right">
                                 <a href="{% url 'user.update' username=user.username %}" type="button" class="btn btn-sm btn-warning mini-profile-btn">정보
                                     수정</a>

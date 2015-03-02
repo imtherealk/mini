@@ -7,7 +7,6 @@ from django.shortcuts import render_to_response
 from mini.web import forms as f
 from mini.web import models as m
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 
 
 @csrf_exempt
@@ -48,14 +47,20 @@ def unregister(request, username=None):
 def read(request, username=None):
     user = m.MyUser.objects.get(username=username)
 
-    if user.is_friend_of(request.user):
+    if request.user.is_friend_of(user):
         is_friend = True
     else:
         is_friend = False
 
+    if request.user.sent_request_to(user):
+        sent_request = True
+    else:
+        sent_request = False
+
     return render_to_response('user/profile.html',
                               {'profile': user,
-                               'is_friend': is_friend}, RequestContext(request))
+                               'is_friend': is_friend,
+                               'sent_request': sent_request}, RequestContext(request))
 
 
 @csrf_exempt

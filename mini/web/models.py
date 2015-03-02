@@ -33,6 +33,9 @@ class MyUser(AbstractUser):
         friendships = Friend.objects.filter(Q(first_user=self) | Q(second_user=self))
         return friendships.filter(Q(first_user=user) | Q(second_user=user)).exists()
 
+    def sent_request_to(self, user):
+        return FriendRequest.objects.filter(from_user=self, to_user=user).exists()
+
 
 class Post(Model):
     writer = models.ForeignKey(settings.AUTH_USER_MODEL)

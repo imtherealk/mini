@@ -33,6 +33,10 @@
                                         <li><a role="menuitem" href="{% url 'friend.delete' to_username=f.username %}">친구 끊기</a></li>
                                     </ul>
                                 </div>
+                                {% elif f in request_sent_friends %}
+                                    <form method="POST" action="{% url 'friend.cancel' to_username=f.username %}">
+                                        <button type="submit" class="btn btn-primary pull-right">친구요청 취소</button>
+                                    </form>
                                 {% else %}
                                     <form method="POST" action="{% url 'friend.request' to_username=f.username %}">
                                         <button type="submit" class="btn btn-primary pull-right">친구 요청</button>

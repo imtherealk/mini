@@ -40,6 +40,7 @@ urlpatterns = patterns(
     url(r'^friendrequest/$', 'mini.web.views.friend.request_list', name='friend.request_list'),
     url(r'^friend/friendrequest/(?P<from_username>\w+)/$', 'mini.web.views.friend.accept', name='friend.accept'),
     url(r'^friendrequest/(?P<from_username>\w+)/delete', 'mini.web.views.friend.decline', name='friend.decline'),
+    url(r'^friendrequest/(?P<to_username>\w+)/cancel', 'mini.web.views.friend.cancel', name='friend.cancel'),
     url(r'^friend/(?P<to_username>\w+)/delete', 'mini.web.views.friend.unfriend', name='friend.delete'),
 
     # Admin

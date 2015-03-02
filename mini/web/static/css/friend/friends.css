@@ -11,9 +11,7 @@
 .mini-friend-list-item{
     -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
-    break-inside: avoid;
 
-    position: relative;
     display: block;
     padding: 10px 15px;
     margin-bottom: 5px;

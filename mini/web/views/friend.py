@@ -53,6 +53,7 @@ def read(request, username=None):
     friendships = m.Friend.objects.filter(Q(first_user=user) | Q(second_user=user))
     friends = m.MyUser.objects.filter(username=None)
     request_user_friends = []
+    request_sent_friends = []
 
     for f in friendships:
         friends = friends\
@@ -63,9 +64,13 @@ def read(request, username=None):
     for friend in friends:
         if request.user.is_friend_of(friend):
             request_user_friends.append(friend)
+        elif request.user.sent_request_to(friend):
+            request_sent_friends.append(friend)
 
     return render_to_response('friend/friends.html',
-                              {'friends': friends, 'request_user_friends': request_user_friends}, ctx)
+                              {'friends': friends,
+                               'request_user_friends': request_user_friends,
+                               'request_sent_friends': request_sent_friends}, ctx)
 
 
 def request_list(request):
@@ -85,7 +90,7 @@ def unfriend(request, to_username=None):
     to_user = m.MyUser.objects.get(username=to_username)
     try:
         friends = m.Friend.objects.get(Q(first_user=user, second_user=to_user) |
-                                          Q(first_user=to_user, second_user=user))
+                                       Q(first_user=to_user, second_user=user))
     except m.Friend.DoesNotExist:
         raise Http404
     friends.delete()
@@ -93,6 +98,19 @@ def unfriend(request, to_username=None):
     try:
         friends_request = m.FriendRequest.objects.get(Q(from_user=user, to_user=to_user) |
                                                       Q(from_user=to_user, to_user=user))
+    except m.FriendRequest.DoesNotExist:
+        raise Http404
+    friends_request.delete()
+
+    return redirect('friend.read', username=user.username)
+
+
+@csrf_exempt
+def cancel(request, to_username=None):
+    user = request.user
+    to_user = m.MyUser.objects.get(username=to_username)
+    try:
+        friends_request = m.FriendRequest.objects.get(from_user=user, to_user=to_user)
     except m.FriendRequest.DoesNotExist:
         raise Http404
     friends_request.delete()
